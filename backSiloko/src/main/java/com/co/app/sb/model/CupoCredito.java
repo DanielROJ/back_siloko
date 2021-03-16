@@ -31,11 +31,11 @@ public class CupoCredito implements Serializable {
 	private BigDecimal valorCupoTramite;
 	
 	@ManyToOne()
-	@JoinColumn(name = "cliente", nullable = false)
+	@JoinColumn(name = "id_cliente", nullable = false)
 	private Cliente cliente;
 	
 	@ManyToOne()
-	@JoinColumn(name = "estado_cupo", nullable = false)
+	@JoinColumn(name = "id_estado_cupo", nullable = false)
 	private EstadoCupo estadoCupo;
 
 	public CupoCredito(BigDecimal valorTotalCupo, BigDecimal valorCupoUso, BigDecimal valorCupoTramite, Cliente cliente,
