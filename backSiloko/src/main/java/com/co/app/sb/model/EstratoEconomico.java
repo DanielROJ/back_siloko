@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "ESTRATO_ECONOMICO")
 public class EstratoEconomico implements Serializable {
 
-	
+	 
 	@Id
 	@Column(name = "id_estrato")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,7 @@
 package com.co.app.sb.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,9 +29,10 @@ public class Pais implements Serializable {
 	private String moneda;
 	
 	@Column(name="valor_punto")
-	private int valorPunto;
+	private BigDecimal valorPunto;
+	
 
-	public Pais(String nombrePais, int puntajePais, String moneda, int valorPunto) {
+	public Pais(String nombrePais, int puntajePais, String moneda, BigDecimal valorPunto) {
 		super();
 		this.nombrePais = nombrePais;
 		this.puntajePais = puntajePais;
@@ -74,11 +76,11 @@ public class Pais implements Serializable {
 		this.moneda = moneda;
 	}
 
-	public int getValorPunto() {
+	public BigDecimal getValorPunto() {
 		return valorPunto;
 	}
 
-	public void setValorPunto(int valorPunto) {
+	public void setValorPunto(BigDecimal valorPunto) {
 		this.valorPunto = valorPunto;
 	}
 	
