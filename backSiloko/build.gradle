@@ -50,3 +50,8 @@ test {
 	useJUnitPlatform()
 }
 
+//For execute project in mode dev
+// In one console gradle build --continuous
+// In an other console gradle bootrun
+//both consoles must execute on same time
+

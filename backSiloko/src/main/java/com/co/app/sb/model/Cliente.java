@@ -56,14 +56,14 @@ public class Cliente implements Serializable {
 		super();
 	}
 	
-	public Cliente(String nombres, String apellidos, String correo, Date fechaRegistro, long documento, Ciudad ciudad,
+	public Cliente(String nombres, String apellidos, String correo, Date fechaRegistro, long documentoId, Ciudad ciudad,
 			RangoAntiguedad rangoAnt, EstratoEconomico estrato, RangoCantidadProductos rangoCantidadProductos) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.fechaRegistro = fechaRegistro;
-		this.documentoId = documento;
+		this.documentoId = documentoId;
 		this.ciudad = ciudad;
 		this.rangoAnt = rangoAnt;
 		this.estrato = estrato;
@@ -109,17 +109,17 @@ public class Cliente implements Serializable {
 	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
-
+ 
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	public long getDocumento() {
+	public long getDocumentoId() {
 		return documentoId;
 	}
 
-	public void setDocumento(long documento) {
-		this.documentoId = documento;
+	public void setDocumento(long documentoId) {
+		this.documentoId = documentoId;
 	}
 
 	public Ciudad getCiudad() {

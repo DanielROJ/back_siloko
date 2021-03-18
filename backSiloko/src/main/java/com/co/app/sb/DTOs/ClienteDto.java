@@ -1,5 +1,7 @@
 package com.co.app.sb.DTOs;
 
+import java.sql.Date;
+
 public class ClienteDto {
 	
 	
@@ -11,7 +13,7 @@ public class ClienteDto {
 	
 	private String email;
 	
-	private String dateRegister;
+	private Date dateRegister;
 	
 	private long idDocument;
 	
@@ -23,7 +25,7 @@ public class ClienteDto {
 	
 	private  RangoCantidadProductosDto rangeAmountProducts;
 
-	public ClienteDto(long id, String names, String surNames, String email, String dateRegister, long idDocument,
+	public ClienteDto(long id, String names, String surNames, String email, Date dateRegister, long idDocument,
 			CiudadDto city, RangoAntiguedadDto rangeOld, EstratoEconomicoDto classEconomic,
 			RangoCantidadProductosDto rangeAmountProducts) {
 		super();
@@ -71,11 +73,11 @@ public class ClienteDto {
 		this.email = email;
 	}
 
-	public String getDateRegister() {
+	public Date getDateRegister() {
 		return dateRegister;
 	}
 
-	public void setDateRegister(String dateRegister) {
+	public void setDateRegister(Date dateRegister) {
 		this.dateRegister = dateRegister;
 	}
 
