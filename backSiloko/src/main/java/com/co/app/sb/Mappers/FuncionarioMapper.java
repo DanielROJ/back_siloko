@@ -16,7 +16,8 @@ import com.co.app.sb.model.Funcionario;
 		RolFuncionarioMapper.class }, nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface FuncionarioMapper {
 
-	@Mappings({ @Mapping(source = "idFuncionario", target = "id"),
+	@Mappings({ 
+			@Mapping(source = "funcionario.idFuncionario", target = "id"),
 			@Mapping(source = "codigoEmpleado", target = "codeEmploy"), 
 			@Mapping(source = "nombres", target = "names"),
 			@Mapping(source = "apellidos", target = "surNames"),
@@ -24,7 +25,8 @@ public interface FuncionarioMapper {
 			@Mapping(source = "rolFuncionario", target = "rol") })
 	FuncionarioDto toDto(Funcionario funcionario);
 
-	@Mappings({ @Mapping(source = "id", target = "idFuncionario"),
+	@Mappings({
+			@Mapping(source = "funcionarioDto.id", target = "idFuncionario"),
 			@Mapping(source = "codeEmploy", target = "codigoEmpleado"),
 			@Mapping(source = "names", target = "nombres"),
 			@Mapping(source = "surNames", target = "apellidos"),

@@ -9,8 +9,11 @@ import com.co.app.sb.model.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario,Long> {
 	
-	@Query(value = "SELECT f.correo FROM FUNCIONARIO f WHERE f.codigo_empleado = :codigo")
+	@Query(value = "SELECT f.correo FROM Funcionario f WHERE f.codigoEmpleado = :codigo")
 	String findEmail(@Param("codigo") long codigoEmpleado);
+	
+	
+	Funcionario findBycodigoEmpleado(long codigoEmpleado);
 	
 
 }

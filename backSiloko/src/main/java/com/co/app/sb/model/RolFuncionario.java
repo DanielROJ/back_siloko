@@ -34,6 +34,9 @@ public class RolFuncionario implements Serializable {
 		return idRolFuncionario;
 	}
 
+	public void setIdRolFuncionario(long idRolFuncionario) {
+		this.idRolFuncionario = idRolFuncionario;
+	}
 
 	public String getNombreRol() {
 		return nombreRol;
@@ -42,6 +45,9 @@ public class RolFuncionario implements Serializable {
 	public void setNombreRol(String nombreRol) {
 		this.nombreRol = nombreRol;
 	}
+
+	
+	
 	
 	
 	

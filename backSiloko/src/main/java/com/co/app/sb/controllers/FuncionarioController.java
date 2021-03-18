@@ -16,28 +16,22 @@ import com.co.app.sb.services.FuncionarioService;
 @RequestMapping(path = "/api/funcionario", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FuncionarioController {
 
-	
 	@Autowired
 	private FuncionarioService funcionarioService;
-	
+
 	private Logger log = Logger.getLogger(FuncionarioController.class.getName());
-	
+
 	@GetMapping("")
-	public ResponseEntity<List<FuncionarioDto>> getListFuncionarios(){
+	public ResponseEntity<List<FuncionarioDto>> getListFuncionarios() {
 		try {
-			
+
 			return ResponseEntity.ok(this.funcionarioService.getListFuncionarios());
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.info(e.getMessage());
-			return ResponseEntity.status(503).build();	
+			return ResponseEntity.status(503).build();
 		}
 	}
-	
-	
-	
-	
-	
-	
+
 }
