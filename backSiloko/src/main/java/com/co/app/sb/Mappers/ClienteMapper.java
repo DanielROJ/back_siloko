@@ -9,7 +9,6 @@ import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Component;
 
-import com.co.app.sb.DTOs.CiudadDto;
 import com.co.app.sb.DTOs.ClienteDto;
 import com.co.app.sb.model.Ciudad;
 import com.co.app.sb.model.Cliente;
