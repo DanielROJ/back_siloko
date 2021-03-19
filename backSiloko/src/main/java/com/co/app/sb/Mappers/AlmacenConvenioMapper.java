@@ -21,4 +21,12 @@ public interface AlmacenConvenioMapper {
 	})
 	AlmacenConvenioDto toDto(AlmacenConvenio almacen);
 
+	
+	@Mappings({
+		@Mapping(source = "id", target = "idAlmacen"),
+		@Mapping(source = "codeNit", target = "nit"),
+		@Mapping(source = "name", target = "nombreAlmacen"),
+		@Mapping(source = "country", target = "pais")
+	})
+	AlmacenConvenio toEntity(AlmacenConvenioDto almacenDto);
 }

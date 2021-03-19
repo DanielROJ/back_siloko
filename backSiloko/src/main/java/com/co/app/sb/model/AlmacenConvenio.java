@@ -43,8 +43,14 @@ public class AlmacenConvenio implements Serializable {
 	}
 
 
+
+
 	public long getIdAlmacen() {
 		return idAlmacen;
+	}
+
+	public void setIdAlmacen(long idAlmacen) {
+		this.idAlmacen = idAlmacen;
 	}
 
 	public long getNit() {

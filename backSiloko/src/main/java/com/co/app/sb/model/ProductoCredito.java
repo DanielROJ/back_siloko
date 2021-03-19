@@ -50,8 +50,14 @@ public class ProductoCredito implements Serializable {
 		super();
 	}
 
+	
+
 	public long getIdProductoCredito() {
 		return idProductoCredito;
+	}
+
+	public void setIdProductoCredito(long idProductoCredito) {
+		this.idProductoCredito = idProductoCredito;
 	}
 
 	public String getNombreProducto() {

@@ -50,10 +50,15 @@ public class FuncionarioAlmacen implements Serializable {
 		super();
 	}
 
+	
+
 	public long getIdFuncionarioAlmacen() {
 		return idFuncionarioAlmacen;
 	}
 
+	public void setIdFuncionarioAlmacen(long idFuncionarioAlmacen) {
+		this.idFuncionarioAlmacen = idFuncionarioAlmacen;
+	}
 
 	public long getCodigoEmpleado() {
 		return codigoEmpleado;
