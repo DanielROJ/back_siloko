@@ -1,0 +1,77 @@
+package com.co.app.sb.controllers;
+
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.logging.Logger;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.util.WebUtils;
+
+import com.co.app.sb.services.LoginService;
+import com.co.app.sb.util.ExceptionBody;
+
+/**
+ * Clase controlador que permite gestionar los errores que se presenten en el procesamiento de las peticiones rest
+ * 
+ * @author German Daniel Rojas
+ *
+ */
+
+@ControllerAdvice
+public class ExceptionController {
+	
+	
+	private ExceptionBody bodyEx;
+	
+	private String message;
+	
+	private Logger log = Logger.getLogger(ExceptionController.class.getName());
+	
+	
+	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class })
+	public final ResponseEntity<ExceptionBody> handleException(Exception ex, WebRequest request) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		 log.warning("Handling " + ex.getClass().getSimpleName() + " due to " + ex.getMessage());
+		
+		
+		if( ex instanceof ClassCastException) {
+			
+			this.message = "Error de parametros api";
+			this.bodyEx = new ExceptionBody(400, this.message);			
+		    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.BAD_REQUEST, request);
+		    
+		    
+		}else if (ex instanceof NoSuchElementException) {
+			
+			this.message = "No se encontro el elemento";
+			this.bodyEx = new ExceptionBody(404, this.message);			
+		    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.NOT_FOUND, request);
+
+		} else  {
+			HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+			return handleExceptionInternal(ex, null, headers, status, request);
+		}
+	}
+
+
+	
+
+	/** A single place to customize the response body of all Exception types. */
+	protected ResponseEntity<ExceptionBody> handleExceptionInternal(Exception ex, ExceptionBody body, HttpHeaders headers,
+			HttpStatus status, WebRequest request) {
+		if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
+			request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
+		}
+
+		return new ResponseEntity<>(body, headers, status);
+	}
+	
+	
+}

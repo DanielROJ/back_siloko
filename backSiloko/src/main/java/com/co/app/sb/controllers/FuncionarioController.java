@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.co.app.sb.DTOs.FuncionarioDto;
 import com.co.app.sb.services.FuncionarioService;
@@ -21,17 +22,16 @@ public class FuncionarioController {
 
 	private Logger log = Logger.getLogger(FuncionarioController.class.getName());
 
+	@GetMapping("/list")
+	public ResponseEntity<List<FuncionarioDto>> getListFuncionarios() throws Exception {
+		return ResponseEntity.ok(this.funcionarioService.getListFuncionarios());
+	}
+
 	@GetMapping("")
-	public ResponseEntity<List<FuncionarioDto>> getListFuncionarios() {
-		try {
-
-			return ResponseEntity.ok(this.funcionarioService.getListFuncionarios());
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			log.info(e.getMessage());
-			return ResponseEntity.status(503).build();
-		}
+	public ResponseEntity<FuncionarioDto> getFuncionario(
+			@RequestParam(name = "value", required = true) long idFuncionario) {
+		FuncionarioDto funcionario = this.funcionarioService.getFuncionario(idFuncionario);
+		return ResponseEntity.ok(funcionario);
 	}
 
 }
