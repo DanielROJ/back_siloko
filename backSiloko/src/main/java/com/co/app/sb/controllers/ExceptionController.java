@@ -15,6 +15,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.co.app.sb.services.LoginService;
 import com.co.app.sb.util.ExceptionBody;
+import com.co.app.sb.util.LoginException;
 
 /**
  * Clase controlador que permite gestionar los errores que se presenten en el procesamiento de las peticiones rest
@@ -34,16 +35,20 @@ public class ExceptionController {
 	private Logger log = Logger.getLogger(ExceptionController.class.getName());
 	
 	
-	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class })
+	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class, LoginException.class })
 	public final ResponseEntity<ExceptionBody> handleException(Exception ex, WebRequest request) {
 		
 		HttpHeaders headers = new HttpHeaders();
-		 log.warning("Handling " + ex.getClass().getSimpleName() + " due to " + ex.getMessage());
-		
-		
-		if( ex instanceof ClassCastException) {
+		log.warning("Handling " + ex.getClass().getSimpleName() + " due to " + ex.getMessage());
 			
-			this.message = "Error de parametros api";
+		 if(ex instanceof LoginException ) {
+			 	this.message = "No se pudo iniciar sesion, resvisar datos de entrada";
+				this.bodyEx = new ExceptionBody(401, this.message);			
+			    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.UNAUTHORIZED, request);
+			    
+		 }else if( ex instanceof ClassCastException) {
+			
+			this.message = "Error de parametros body";
 			this.bodyEx = new ExceptionBody(400, this.message);			
 		    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.BAD_REQUEST, request);
 		    
@@ -61,6 +66,12 @@ public class ExceptionController {
 	}
 
 
+	
+	
+	
+	
+	
+	
 	
 
 	/** A single place to customize the response body of all Exception types. */

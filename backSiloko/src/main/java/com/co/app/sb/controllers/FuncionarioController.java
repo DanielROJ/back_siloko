@@ -24,12 +24,13 @@ public class FuncionarioController {
 
 	@GetMapping("/list")
 	public ResponseEntity<List<FuncionarioDto>> getListFuncionarios() throws Exception {
-		return ResponseEntity.ok(this.funcionarioService.getListFuncionarios());
+		List<FuncionarioDto> listFuncionarios = this.funcionarioService.getListFuncionarios();
+		return ResponseEntity.ok(listFuncionarios);
 	}
 
 	@GetMapping("")
 	public ResponseEntity<FuncionarioDto> getFuncionario(
-			@RequestParam(name = "value", required = true) long idFuncionario) {
+			@RequestParam(name = "value", required = true) long idFuncionario) throws Exception{
 		FuncionarioDto funcionario = this.funcionarioService.getFuncionario(idFuncionario);
 		return ResponseEntity.ok(funcionario);
 	}

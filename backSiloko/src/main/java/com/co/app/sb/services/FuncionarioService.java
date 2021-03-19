@@ -10,6 +10,7 @@ import com.co.app.sb.DTOs.FuncionarioDto;
 import com.co.app.sb.Mappers.FuncionarioMapper;
 import com.co.app.sb.model.Funcionario;
 import com.co.app.sb.repository.FuncionarioRepository;
+import com.co.app.sb.util.LoginException;
 
 /**
  * 
@@ -46,7 +47,7 @@ public class FuncionarioService {
 	 * @return FuncionarioDto
 	 * @throws NoSuchElementException
 	 */
-	public FuncionarioDto getFuncionario(long idFuncionario) throws NoSuchElementException{
+	public FuncionarioDto getFuncionario(long idFuncionario) throws NoSuchElementException, Exception{
 		Funcionario funcionarioTmp  = this.funcionarioRep.findById(idFuncionario).orElseThrow();
 		if(funcionarioTmp.equals(null)) {
 			return null;
@@ -56,6 +57,18 @@ public class FuncionarioService {
 		}
 	}
 	
+	public FuncionarioDto getFuncionarioByCodigoEmpleado(long codigoFuncionario) throws Exception{
+		Funcionario funcionarioTmp  = this.funcionarioRep.findBycodigoEmpleado(codigoFuncionario).orElseThrow();
+		if(funcionarioTmp.equals(null)) {
+			return null;
+		}else {
+			FuncionarioDto funcionarioDtoTmp = this.funcionarioMapper.toDto(funcionarioTmp);
+			return funcionarioDtoTmp;
+		}
+	}
+	
+	
+	
 	
 	/**
 	 * Metodo que permite encontrar el email del funcionario basado en su codigo_empleado
@@ -64,7 +77,7 @@ public class FuncionarioService {
 	 * @throws Exception
 	 */
 	public String getCorreoFuncionario(long codigoFuncionario) throws Exception{
-		return this.funcionarioRep.findEmail(codigoFuncionario);
+		return this.funcionarioRep.findEmail(codigoFuncionario).orElseThrow(()-> new LoginException());
 	}
 	
 	

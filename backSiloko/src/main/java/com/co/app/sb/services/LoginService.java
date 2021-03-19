@@ -6,6 +6,9 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.co.app.sb.DTOs.FuncionarioDto;
+import com.co.app.sb.util.LoginException;
+
 
 
 
@@ -19,16 +22,15 @@ public class LoginService {
 	private Logger log = Logger.getLogger(LoginService.class.getName());
 	
 
-	private boolean authFuncionario(String correo, long codigoEmpleado) throws Exception{
+	public FuncionarioDto authFuncionario(String correo, long codigoEmpleado) throws Exception{
 		String correoFuncionario = this.funcionarioService.getCorreoFuncionario(codigoEmpleado);
-		if(correoFuncionario.equals(null) || !correoFuncionario.equals(correo)) {
+		
+		if(correoFuncionario.equals(null) || !correoFuncionario.equals(correo))  {
 			correoFuncionario = null;
-			log.info("ERR Inicio de sesion usr:"+codigoEmpleado+" email:"+correo);
-			return false;
+			throw new LoginException();		
 		}else {
 			correoFuncionario = null;
-			log.info("OK Inicio de sesion usr:"+codigoEmpleado+" email:"+correo);
-			return true;
+			return this.funcionarioService.getFuncionarioByCodigoEmpleado(codigoEmpleado);
 		}	
 	}
 	
