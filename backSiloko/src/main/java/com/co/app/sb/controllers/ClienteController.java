@@ -44,7 +44,7 @@ public class ClienteController {
 	
 	
 	/**
-	 * Metodo que retorna un cliente basado en su documento de identificación naciona
+	 * Metodo que retorna un cliente basado en su documento de identificacion nacional
 	 * @return ResponseEntity<ClienteDto>
 	 */
 	@GetMapping("/documentoId")

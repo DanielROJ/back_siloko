@@ -24,10 +24,15 @@ public class ClienteDto {
 	private EstratoEconomicoDto classEconomic;
 	
 	private  RangoCantidadProductosDto rangeAmountProducts;
+	
+	private CupoCreditoDto credit;
+	
+
+	
 
 	public ClienteDto(long id, String names, String surNames, String email, Date dateRegister, long idDocument,
 			CiudadDto city, RangoAntiguedadDto rangeOld, EstratoEconomicoDto classEconomic,
-			RangoCantidadProductosDto rangeAmountProducts) {
+			RangoCantidadProductosDto rangeAmountProducts, CupoCreditoDto credit) {
 		super();
 		this.id = id;
 		this.names = names;
@@ -39,6 +44,7 @@ public class ClienteDto {
 		this.rangeOld = rangeOld;
 		this.classEconomic = classEconomic;
 		this.rangeAmountProducts = rangeAmountProducts;
+		this.credit = credit;
 	}
 
 	public long getId() {
@@ -120,11 +126,14 @@ public class ClienteDto {
 	public void setRangeAmountProducts(RangoCantidadProductosDto rangeAmountProducts) {
 		this.rangeAmountProducts = rangeAmountProducts;
 	}
-	
-	
-	
-	
-	
+
+	public CupoCreditoDto getCredit() {
+		return credit;
+	}
+
+	public void setCredit(CupoCreditoDto credit) {
+		this.credit = credit;
+	}
 	
 
 }

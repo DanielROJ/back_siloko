@@ -14,7 +14,8 @@ import com.co.app.sb.model.Ciudad;
 import com.co.app.sb.model.Cliente;
 
 @Component
-@Mapper(componentModel = "spring", uses = {EstratoEconomicoMapper.class, CiudadMapper.class,RangoAntiguedadMapper.class,RangoCantidadProductosMapper.class},
+@Mapper(componentModel = "spring", uses = {EstratoEconomicoMapper.class, 
+		CiudadMapper.class,RangoAntiguedadMapper.class,RangoCantidadProductosMapper.class, CupoCreditoMapper.class},
 nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClienteMapper {
 
@@ -28,7 +29,8 @@ public interface ClienteMapper {
 		@Mapping(source = "ciudad", target = "city"),
 		@Mapping(source = "rangoAnt", target = "rangeOld"),
 		@Mapping(source = "estrato", target = "classEconomic"),
-		@Mapping(source = "rangoCantidadProductos", target = "rangeAmountProducts")
+		@Mapping(source = "rangoCantidadProductos", target = "rangeAmountProducts"),
+		@Mapping(source = "cupoCredito", target = "credit")
 	})
 	ClienteDto toDto(Cliente cliente);
 	
@@ -43,7 +45,8 @@ public interface ClienteMapper {
 		@Mapping(source = "city", target = "ciudad"),
 		@Mapping(source = "rangeOld", target = "rangoAnt"),
 		@Mapping(source = "classEconomic", target = "estrato"),
-		@Mapping(source = "rangeAmountProducts", target = "rangoCantidadProductos")
+		@Mapping(source = "rangeAmountProducts", target = "rangoCantidadProductos"),
+		@Mapping(source = "credit", target = "cupoCredito")
 	})
 	Cliente toEntity(ClienteDto clienteDto);
 	 

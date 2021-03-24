@@ -38,7 +38,9 @@ public class EstadoCupo implements Serializable {
 		return idEstadoCupo;
 	}
 
-	
+	public void setIdEstadoCupo(int idEstadoCupo) {
+		this.idEstadoCupo = idEstadoCupo;
+	}
 
 	public String getEstado() {
 		return estado;

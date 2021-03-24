@@ -2,6 +2,7 @@ package com.co.app.sb.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,9 +33,13 @@ public class CupoCredito implements Serializable {
 	@Column(name = "val_cupo_tramite")
 	private BigDecimal valorCupoTramite;
 	
-	@ManyToOne()
-	@JoinColumn(name = "id_cliente", nullable = false)
-	private Cliente cliente;
+	@Column(name = "fecha_calculado")
+	private Date fechaCalculado;
+	
+	 @OneToOne
+	 @MapsId
+	 @JoinColumn(name = "id_cliente")   
+	 private Cliente user;
 	
 	@ManyToOne()
 	@JoinColumn(name = "id_estado_cupo", nullable = false)
@@ -44,16 +51,20 @@ public class CupoCredito implements Serializable {
 		this.valorTotalCupo = valorTotalCupo;
 		this.valorCupoUso = valorCupoUso;
 		this.valorCupoTramite = valorCupoTramite;
-		this.cliente = cliente;
 		this.estadoCupo = estadoCupo;
 	}
-
+	
 	public CupoCredito() {
 		super();
 	}
 
 	public long getIdCupoCredito() {
 		return idCupoCredito;
+	}
+
+
+	public void setIdCupoCredito(long idCupoCredito) {
+		this.idCupoCredito = idCupoCredito;
 	}
 
 	public BigDecimal getValorTotalCupo() {
@@ -80,14 +91,6 @@ public class CupoCredito implements Serializable {
 		this.valorCupoTramite = valorCupoTramite;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 	public EstadoCupo getEstadoCupo() {
 		return estadoCupo;
 	}
@@ -95,8 +98,15 @@ public class CupoCredito implements Serializable {
 	public void setEstadoCupo(EstadoCupo estadoCupo) {
 		this.estadoCupo = estadoCupo;
 	}
-	
-	
-	
 
+
+	public Date getFechaCalculado() {
+		return fechaCalculado;
+	}
+
+
+	public void setFechaCalculado(Date fechaCalculado) {
+		this.fechaCalculado = fechaCalculado;
+	}
+	
 }

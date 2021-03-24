@@ -3,13 +3,17 @@ package com.co.app.sb.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -52,6 +56,14 @@ public class Cliente implements Serializable {
 	@JoinColumn(name = "id_rango_can_productos", nullable = false)
 	private RangoCantidadProductos rangoCantidadProductos;
 	
+	
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+	private CupoCredito cupoCredito;
+	
+	
+	
 	public Cliente() {
 		super();
 	}
@@ -70,6 +82,14 @@ public class Cliente implements Serializable {
 		this.rangoCantidadProductos = rangoCantidadProductos;
 	}
 
+
+	public CupoCredito getCupoCredito() {
+		return cupoCredito;
+	}
+
+	public void setCupoCredito(CupoCredito cupoCredito) {
+		this.cupoCredito = cupoCredito;
+	}
 
 	public long getIdCliente() {
 		return idCliente;
