@@ -48,5 +48,29 @@ public class LoginController {
 		
 	}
 	
+	
+	@PostMapping("/funcionarioAlmacen")
+	public ResponseEntity<FuncionarioDto> authFuncionarioAlm(@RequestBody Map<String, Object> body) throws Exception{
+	
+			String correoFuncionario = (String) body.get("email");
+			long codigoFuncionario = Long.valueOf((Integer)body.get("code"));
+			
+			FuncionarioDto res = this.loginService.authFuncionario(correoFuncionario, codigoFuncionario);
+			return ResponseEntity.ok(res);
+		
+	}
+	
+	@PostMapping("/cliente")
+	public ResponseEntity<FuncionarioDto> authCliente(@RequestBody Map<String, Object> body) throws Exception{
+	
+			String correoFuncionario = (String) body.get("email");
+			long codigoFuncionario = Long.valueOf((Integer)body.get("code"));
+			
+			FuncionarioDto res = this.loginService.authFuncionario(correoFuncionario, codigoFuncionario);
+			return ResponseEntity.ok(res);
+		
+	}
+	
+	
 }
   

@@ -1,7 +1,6 @@
 package com.co.app.sb.controllers;
 
-import java.util.InputMismatchException;
-import java.util.List;
+
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.util.WebUtils;
-
-import com.co.app.sb.services.LoginService;
 import com.co.app.sb.util.ExceptionBody;
 import com.co.app.sb.util.LoginException;
 

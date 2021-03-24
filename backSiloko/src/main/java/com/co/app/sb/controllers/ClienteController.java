@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.app.sb.DTOs.CiudadDto;
@@ -23,7 +24,12 @@ public class ClienteController {
 	
 	private Logger log = Logger.getLogger(ClienteController.class.getName());
 	
-	@GetMapping("")
+	
+	/**
+	 * Metodo que retorna todos los clientes de la base de datos, !!cuidado!!
+	 * @return List<ClienteDto>
+	 */
+	@GetMapping("/list")
 	public ResponseEntity<List<ClienteDto>> getListClientes(){
 		try {
 			
@@ -34,6 +40,16 @@ public class ClienteController {
 			log.info(e.getMessage());
 			return ResponseEntity.status(503).build();	
 		}
+	}
+	
+	
+	/**
+	 * Metodo que retorna un cliente basado en su documento de identificación naciona
+	 * @return ResponseEntity<ClienteDto>
+	 */
+	@GetMapping("/documentoId")
+	public ResponseEntity<ClienteDto> getClienteByDocumento(@RequestParam(value = "value") long documento) throws Exception{
+		return ResponseEntity.ok(this.clienteService.getClienteByDocumento(documento));
 	}
 	
 	
