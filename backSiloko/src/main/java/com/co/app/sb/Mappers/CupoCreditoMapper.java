@@ -5,10 +5,12 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.ReportingPolicy;
+import org.springframework.stereotype.Component;
 
 import com.co.app.sb.DTOs.CupoCreditoDto;
 import com.co.app.sb.model.CupoCredito;
 
+@Component
 @Mapper(componentModel = "spring", uses = EstadoCupoMapper.class,
 nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CupoCreditoMapper {

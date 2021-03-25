@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.co.app.sb.DTOs.CiudadDto;
 import com.co.app.sb.DTOs.ClienteDto;
+import com.co.app.sb.DTOs.CupoCreditoDto;
+import com.co.app.sb.model.CupoCredito;
 import com.co.app.sb.services.ClienteService;
 import com.co.app.sb.services.CupoCreditoService;
 
@@ -59,10 +59,14 @@ public class ClienteController {
 	
 	
 	@PostMapping("/cupoCredito/bloquear")
-	public ResponseEntity<Boolean> setBloquearCupoCredito(@RequestParam(value = "value") long idCliente)throws Exception{
-		boolean res = this.cupoCreditoService.BloquearCupo(idCliente);
+	public ResponseEntity<CupoCreditoDto> setBloquearCupoCredito(@RequestParam(value = "cliente") long idCliente, @RequestParam(value = "funcionario") long idFuncionario)throws Exception{
+		CupoCreditoDto res = this.cupoCreditoService.BloquearCupo(idCliente, idFuncionario);
 		return ResponseEntity.ok(res);
 	}
 	
+	@GetMapping("/cupoCredito")
+	public ResponseEntity<List<CupoCredito>> listCupo(){
+		return ResponseEntity.ok(this.cupoCreditoService.listCupoCredito());
+	}
 	
 }

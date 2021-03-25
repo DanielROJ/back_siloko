@@ -37,7 +37,6 @@ public class CupoCredito implements Serializable {
 	private Date fechaCalculado;
 	
 	 @OneToOne
-	 @MapsId
 	 @JoinColumn(name = "id_cliente")   
 	 private Cliente user;
 	
