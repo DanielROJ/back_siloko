@@ -3,7 +3,7 @@ package com.co.app.sb.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
-
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,12 +11,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.ParameterMode;
+
 
 @Entity
 @Table(name = "CUPO_CREDITO")
+@NamedStoredProcedureQueries({
+	
+	@NamedStoredProcedureQuery(
+	        name = "CALCULO_CUPO_CREDITO",
+	        procedureName = "ADMIN_SILOKO.CALCULO_CUPO",
+	        parameters = {
+	        		@StoredProcedureParameter(mode=ParameterMode.IN, name="id_cliente", type=Long.class),
+	        	    @StoredProcedureParameter(mode=ParameterMode.OUT, name="response", type=Integer.class)
+	        	    
+	    })
+})
 public class CupoCredito implements Serializable {
 
 	@Id

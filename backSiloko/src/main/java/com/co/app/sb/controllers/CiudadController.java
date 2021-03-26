@@ -2,6 +2,7 @@ package com.co.app.sb.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.app.sb.DTOs.CiudadDto;
@@ -24,7 +25,7 @@ public class CiudadController {
 	
 	private Logger log = Logger.getLogger(CiudadController.class.getName());
 	
-	@GetMapping()
+	@GetMapping("/list")
 	public ResponseEntity<List<CiudadDto>> getListCiudades(){
 		try {
 			return ResponseEntity.ok(this.ciudadServie.getAllCiudades());
@@ -33,6 +34,12 @@ public class CiudadController {
 			log.info(e.getMessage());
 			return ResponseEntity.status(503).build();		
 		}
+	}
+	
+	
+	@GetMapping("/pais")
+	public ResponseEntity<List<CiudadDto>> getListCiudadesByPais(@RequestParam("value") long idPais) throws Exception{
+		return ResponseEntity.ok(this.ciudadServie.getAllCiudadesByPais(idPais));
 	}
 	
 

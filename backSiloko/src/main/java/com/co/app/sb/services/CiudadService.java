@@ -28,6 +28,9 @@ public class CiudadService {
 	}
 	
 	
+	public List<CiudadDto> getAllCiudadesByPais(long idPais) throws Exception {
+		return this.ciudadMapper.entityListToDtoList(this.ciudadRep.findBypais_idPais(idPais));
+	}
 	
 	
 }

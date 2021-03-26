@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.util.WebUtils;
 import com.co.app.sb.util.ExceptionBody;
+import com.co.app.sb.util.GeneracionCupoException;
 import com.co.app.sb.util.LoginException;
 
 /**
@@ -32,13 +33,18 @@ public class ExceptionController {
 	private Logger log = Logger.getLogger(ExceptionController.class.getName());
 	
 	
-	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class, LoginException.class })
+	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class, LoginException.class, GeneracionCupoException.class })
 	public final ResponseEntity<ExceptionBody> handleException(Exception ex, WebRequest request) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		log.warning("Handling " + ex.getClass().getSimpleName() + " due to " + ex.getMessage());
 			
-		 if(ex instanceof LoginException ) {
+		 if(ex instanceof GeneracionCupoException ) {
+			 	this.message = "No se pudo generar el cupo credito";
+				this.bodyEx = new ExceptionBody(404, this.message);			
+			    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.NOT_FOUND, request);
+	
+		 }else if(ex instanceof LoginException ) {
 			 	this.message = "No se pudo iniciar sesion, resvisar datos de entrada";
 				this.bodyEx = new ExceptionBody(401, this.message);			
 			    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.UNAUTHORIZED, request);

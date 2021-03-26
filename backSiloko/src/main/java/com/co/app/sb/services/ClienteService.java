@@ -32,5 +32,10 @@ public class ClienteService {
 	}
 	
 	
+	public boolean getExistClient(long idCliente) throws Exception {
+		return this.clienteRep.existsById(idCliente);
+	}
+	
+	
 	
 }

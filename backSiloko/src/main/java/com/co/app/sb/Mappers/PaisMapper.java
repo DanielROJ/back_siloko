@@ -1,5 +1,7 @@
 package com.co.app.sb.Mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -7,7 +9,9 @@ import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Component;
 
+import com.co.app.sb.DTOs.CiudadDto;
 import com.co.app.sb.DTOs.PaisDto;
+import com.co.app.sb.model.Ciudad;
 import com.co.app.sb.model.Pais;
 
 @Component
@@ -32,5 +36,10 @@ public interface PaisMapper {
 		@Mapping(source = "pointAmount", target = "valorPunto")
 	})
 	Pais toEntity(PaisDto paisDto);
+	
+	
+	List<PaisDto> entityListToDtoList(List<Pais> listPais);
+	
+	List<Pais> dtoListToEntityList(List<PaisDto> listPaisDto);
 
 }

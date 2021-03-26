@@ -57,12 +57,52 @@ public class ClienteController {
 		return ResponseEntity.ok(this.clienteService.getClienteByDocumento(documento));
 	}
 	
-	
+	/**
+	 * Metodo que bloquea el cupo de credito de un cliente, cuando un funcionario envia la orden
+	 * @param idCliente id del cliente en la base de datos 
+	 * @param idFuncionario id del funcionario  en la base de datos
+	 * @return CupoCredito actualizado con el nuevo estado;
+	 * @throws Exception
+	 */
 	@PostMapping("/cupoCredito/bloquear")
 	public ResponseEntity<CupoCreditoDto> setBloquearCupoCredito(@RequestParam(value = "cliente") long idCliente, @RequestParam(value = "funcionario") long idFuncionario)throws Exception{
 		CupoCreditoDto res = this.cupoCreditoService.BloquearCupo(idCliente, idFuncionario);
 		return ResponseEntity.ok(res);
 	}
+	
+	
+	/**
+	 * Metodo que desbloquea el cupo de credito de un cliente, cuando un funcionario envia la orden
+	 * @param idCliente id del cliente en la base de datos 
+	 * @param idFuncionario id del funcionario  en la base de datos
+	 * @return CupoCredito actualizado con el nuevo estado;
+	 * @throws Exception
+	 */
+	@PostMapping("/cupoCredito/desbloquear")
+	public ResponseEntity<CupoCreditoDto> setDesbloquearCupoCredito(@RequestParam(value = "cliente") long idCliente, @RequestParam(value = "funcionario") long idFuncionario)throws Exception{
+		CupoCreditoDto res = this.cupoCreditoService.DesbloquearCupo(idCliente, idFuncionario);
+		return ResponseEntity.ok(res);
+	}
+	
+	
+	/**
+	 * Metodo que genera el cupo de credito de un cliente, cuando un funcionario envia la orden
+	 * @param idCliente id del cliente en la base de datos 
+	 * @param idFuncionario id del funcionario  en la base de datos
+	 * @return CupoCredito actualizado con el nuevo estado y valor asignado;
+	 * @throws Exception
+	 */
+	@PostMapping("/cupoCredito/generar")
+	public ResponseEntity<CupoCreditoDto> setGenerarCupoCredito(@RequestParam(value = "cliente") long idCliente, @RequestParam(value = "funcionario") long idFuncionario)throws Exception{
+		CupoCreditoDto res = this.cupoCreditoService.GenerarCupoCliente(idCliente, idFuncionario);
+		return ResponseEntity.ok(res);
+	}
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/cupoCredito")
 	public ResponseEntity<List<CupoCredito>> listCupo(){

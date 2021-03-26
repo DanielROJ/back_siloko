@@ -1,6 +1,7 @@
 package com.co.app.sb.ModuloJDBC;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ public class DAOgeneric<T> {
 
 	public T findElementByColumn(long id, String nameColumn) {
 		try {
-			this.con = ConnectionJdbc.GenerateConnection();
+			this.con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","admin_siloko","admin");
 			try {
 
 				prepareStm = con.prepareStatement("select * from " + nombreTabla + " where " + nameColumn + " = ?");
