@@ -1,5 +1,7 @@
 package com.co.app.sb.Mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -7,7 +9,9 @@ import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Component;
 
+import com.co.app.sb.DTOs.RangoAntiguedadDto;
 import com.co.app.sb.DTOs.RangoCantidadProductosDto;
+import com.co.app.sb.model.RangoAntiguedad;
 import com.co.app.sb.model.RangoCantidadProductos;
 
 @Component
@@ -30,5 +34,8 @@ public interface RangoCantidadProductosMapper {
 	})
 	RangoCantidadProductos toEntity(RangoCantidadProductosDto rangoCantidadDto);
 	
+	List<RangoCantidadProductosDto> entityListToDtoList(List<RangoCantidadProductos> listRango);
+	
+	List<RangoCantidadProductos> dtoListToEntityList(List<RangoCantidadProductosDto> listRango);
 
 }

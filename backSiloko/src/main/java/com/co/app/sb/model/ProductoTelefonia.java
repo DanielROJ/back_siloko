@@ -38,6 +38,16 @@ public class ProductoTelefonia implements Serializable {
 	public ProductoTelefonia() {
 		super();
 	}
+	
+	
+
+	public long getIdProductoTelefonia() {
+		return idProductoTelefonia;
+	}
+
+	public void setIdProductoTelefonia(long idProductoTelefonia) {
+		this.idProductoTelefonia = idProductoTelefonia;
+	}
 
 	public String getNombreProducto() {
 		return nombreProducto;
