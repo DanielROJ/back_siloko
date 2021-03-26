@@ -1,10 +1,11 @@
 package com.co.app.sb.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.co.app.sb.DTOs.CiudadDto;
 import com.co.app.sb.services.CiudadService;
 
@@ -40,6 +41,11 @@ public class CiudadController {
 	@GetMapping("/pais")
 	public ResponseEntity<List<CiudadDto>> getListCiudadesByPais(@RequestParam("value") long idPais) throws Exception{
 		return ResponseEntity.ok(this.ciudadServie.getAllCiudadesByPais(idPais));
+	}
+	
+	@PutMapping("/puntaje")
+	public ResponseEntity<CiudadDto> setUpdatePuntaje(@RequestBody CiudadDto estratoDto) throws Exception{
+		return ResponseEntity.ok(this.ciudadServie.updatePuntajeCiudad(estratoDto.getId(), estratoDto.getPoints()));
 	}
 	
 

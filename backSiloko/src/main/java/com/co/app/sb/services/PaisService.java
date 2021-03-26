@@ -1,10 +1,9 @@
 package com.co.app.sb.services;
 
 import java.util.List;
-
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.co.app.sb.DTOs.PaisDto;
 import com.co.app.sb.Mappers.PaisMapper;
 import com.co.app.sb.repository.PaisRepository;
@@ -25,6 +24,16 @@ public class PaisService {
 	 */
 	public List<PaisDto> getListPais() throws Exception{	
 		return this.paisMapper.entityListToDtoList(this.paisRep.findAll());
+	}
+	
+	
+	public PaisDto updatePuntajePais(long idPais, int puntaje) throws Exception{
+		if(this.paisRep.existsById(idPais)) {
+			this.paisRep.ActualizarPuntaje(puntaje, idPais);
+			return this.paisMapper.toDto(this.paisRep.findById(idPais).orElseThrow());
+		}else {
+			throw new NoSuchElementException();
+		}
 	}
 	
 	
