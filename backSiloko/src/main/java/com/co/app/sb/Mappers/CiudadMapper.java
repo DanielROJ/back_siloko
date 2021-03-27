@@ -21,7 +21,7 @@ public interface CiudadMapper {
 	@Mappings({
 			@Mapping(source = "idCiudad", target = "id"),
 			@Mapping(source = "nombreCiudad", target = "name"),
-			@Mapping(source = "puntajeCiudad", target = "points"),
+			@Mapping(source = "puntajeCiudad", target = "amountPoints"),
 			@Mapping(source = "pais", target = "country")
 	})
 	CiudadDto toDto(Ciudad ciudad);
@@ -29,7 +29,7 @@ public interface CiudadMapper {
 	@Mappings({
 		@Mapping(source = "id", target = "idCiudad"),
 		@Mapping(source = "name", target = "nombreCiudad"),
-		@Mapping(source = "points", target = "puntajeCiudad"),
+		@Mapping(source = "amountPoints", target = "puntajeCiudad"),
 		@Mapping(source = "country", target = "pais")
 	})
 	Ciudad toEntity(CiudadDto ciudadDto);

@@ -45,7 +45,7 @@ public class CiudadController {
 	
 	@PutMapping("/puntaje")
 	public ResponseEntity<CiudadDto> setUpdatePuntaje(@RequestBody CiudadDto estratoDto) throws Exception{
-		return ResponseEntity.ok(this.ciudadServie.updatePuntajeCiudad(estratoDto.getId(), estratoDto.getPoints()));
+		return ResponseEntity.ok(this.ciudadServie.updatePuntajeCiudad(estratoDto.getId(), estratoDto.getamountPoints()));
 	}
 	
 

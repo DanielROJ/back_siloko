@@ -16,7 +16,7 @@ import com.co.app.sb.DTOs.RangoCantidadProductosDto;
 import com.co.app.sb.services.RangoCantidadService;
 
 @RestController()
-@RequestMapping(path = "/api/RangoCantidad", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/rangoCantidad", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RangoCantidadProdController {
 	
 	
@@ -46,6 +46,6 @@ public class RangoCantidadProdController {
 		return ResponseEntity.ok(this.rangoService.updatePuntajeRangoCantidadProductos(rangoDto.getId(), rangoDto.getAmountPoints()));
 	}
 	
-	
+	 
 
 }

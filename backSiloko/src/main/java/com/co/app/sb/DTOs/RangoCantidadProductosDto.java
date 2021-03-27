@@ -3,24 +3,24 @@ package com.co.app.sb.DTOs;
 public class RangoCantidadProductosDto {
 
 	
-	private long id;
+	private int id;
 	
 	private String rangeAmountProducts;
 	
 	private int amountPoints;
 
-	public RangoCantidadProductosDto(long id, String rangeAmountProducts, int amountPoints) {
+	public RangoCantidadProductosDto(int id, String rangeAmountProducts, int amountPoints) {
 		super();
 		this.id = id;
 		this.rangeAmountProducts = rangeAmountProducts;
 		this.amountPoints = amountPoints;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

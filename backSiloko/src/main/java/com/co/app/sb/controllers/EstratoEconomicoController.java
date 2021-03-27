@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.app.sb.DTOs.EstratoEconomicoDto;
@@ -34,5 +35,12 @@ public class EstratoEconomicoController {
 		return ResponseEntity.ok(this.estratoService.updatePuntajeEstrato(estrato.getId(), estrato.getAmountPoints()));
 	}
 	
+	
+	
+	@GetMapping("")
+	public ResponseEntity<EstratoEconomicoDto> getEstratoById(@RequestParam("value") int id)throws Exception{
+		return ResponseEntity.ok(this.estratoService.getEstratoEconomicoByID(id));
+	}
 
 }
+ 

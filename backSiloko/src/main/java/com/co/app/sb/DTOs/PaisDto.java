@@ -12,15 +12,15 @@ public class PaisDto {
 	
 	private String typeCoin;
 	
-	private int pointAmount;
+	private int amountPoints;
 
-	public PaisDto(long id, String name, BigDecimal valuePoint, String typeCoin, int pointAmount) {
+	public PaisDto(long id, String name, BigDecimal valuePoint, String typeCoin, int amountPoints) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.valuePoint = valuePoint;
 		this.typeCoin = typeCoin;
-		this.pointAmount = pointAmount;
+		this.amountPoints = amountPoints;
 	}
 
 	public long getId() {
@@ -55,12 +55,12 @@ public class PaisDto {
 		this.typeCoin = typeCoin;
 	}
 
-	public int getPointAmount() {
-		return pointAmount;
+	public int getamountPoints() {
+		return amountPoints;
 	}
 
-	public void setPointAmount(int pointAmount) {
-		this.pointAmount = pointAmount;
+	public void setamountPoints(int amountPoints) {
+		this.amountPoints = amountPoints;
 	}
 	
 	

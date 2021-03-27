@@ -2,24 +2,24 @@ package com.co.app.sb.DTOs;
 
 public class EstratoEconomicoDto {
 
-	private long id;
+	private int id;
 	
 	private int numClassEconomic;
 	
 	private int amountPoints;
 
-	public EstratoEconomicoDto(long id, int numClassEconomic, int amountPoints) {
+	public EstratoEconomicoDto(int id, int numClassEconomic, int amountPoints) {
 		super();
 		this.id = id;
 		this.numClassEconomic = numClassEconomic;
 		this.amountPoints = amountPoints;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

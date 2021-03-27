@@ -6,15 +6,15 @@ public class CiudadDto {
 	
 	private String name;
 	
-	private int points;
+	private int amountPoints;
 	
 	private PaisDto country;
 
-	public CiudadDto(long id, String name, int points, PaisDto country) {
+	public CiudadDto(long id, String name, int amountPoints, PaisDto country) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.points = points; 
+		this.amountPoints = amountPoints; 
 		this.country = country; 
 	} 
 
@@ -34,12 +34,12 @@ public class CiudadDto {
 		this.name = name;
 	}
 
-	public int getPoints() {
-		return points;
+	public int getamountPoints() {
+		return amountPoints;
 	}
 
-	public void setPoints(int points) {
-		this.points = points;
+	public void setamountPoints(int amountPoints) {
+		this.amountPoints = amountPoints;
 	}
 
 	public PaisDto getCountry() {

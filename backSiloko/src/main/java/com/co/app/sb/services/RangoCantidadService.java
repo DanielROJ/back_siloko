@@ -27,7 +27,7 @@ public class RangoCantidadService {
 	
 	
 	
-	public RangoCantidadProductosDto  updatePuntajeRangoCantidadProductos(long idRangoCantidad, int puntaje) throws Exception{
+	public RangoCantidadProductosDto  updatePuntajeRangoCantidadProductos(int idRangoCantidad, int puntaje) throws Exception{
 		if(this.rangoCanRep.existsById(idRangoCantidad)) {
 			this.rangoCanRep.ActualizarPuntaje(puntaje, idRangoCantidad);
 			return this.rangoCanMapper.toDto(this.rangoCanRep.findById(idRangoCantidad).orElseThrow());

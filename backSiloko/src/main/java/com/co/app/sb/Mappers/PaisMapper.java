@@ -23,7 +23,7 @@ public interface PaisMapper {
 		@Mapping(source = "nombrePais",target = "name"),
 		@Mapping(source = "puntajePais",target = "valuePoint"),
 		@Mapping(source = "moneda",target = "typeCoin"),
-		@Mapping(source = "valorPunto",target = "pointAmount")
+		@Mapping(source = "valorPunto",target = "amountPoints")
 	})
 	PaisDto toDto(Pais pais);
 	
@@ -33,7 +33,7 @@ public interface PaisMapper {
 		@Mapping(source = "name", target = "nombrePais"),
 		@Mapping(source = "valuePoint", target = "puntajePais"),
 		@Mapping(source = "typeCoin", target = "moneda"),
-		@Mapping(source = "pointAmount", target = "valorPunto")
+		@Mapping(source = "amountPoints", target = "valorPunto")
 	})
 	Pais toEntity(PaisDto paisDto);
 	
