@@ -9,7 +9,7 @@ import org.mapstruct.ReportingPolicy;
 import com.co.app.sb.DTOs.AlmacenConvenioDto;
 import com.co.app.sb.model.AlmacenConvenio;
 
-@Mapper(componentModel = "spring", 
+@Mapper(componentModel = "spring", uses = PaisMapper.class, 
 nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AlmacenConvenioMapper {
 	

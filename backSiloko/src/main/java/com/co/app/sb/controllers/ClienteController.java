@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -99,6 +101,11 @@ public class ClienteController {
 	}
 	
 	
+	@PutMapping("/cupoCredito/manual")
+	public ResponseEntity<CupoCreditoDto> setSaldoCupoCredito(@RequestParam(value = "funcionario") long idFuncionario, @RequestBody CupoCreditoDto cupo)throws Exception{
+		CupoCreditoDto res = this.cupoCreditoService.AsignarCupoCreditoManual(idFuncionario,  cupo.getId(), cupo.getTotalSizeCredit());
+		return ResponseEntity.ok(res);
+	}
 	
 	
 	

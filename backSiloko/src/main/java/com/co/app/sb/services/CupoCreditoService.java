@@ -1,5 +1,6 @@
 package com.co.app.sb.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
@@ -117,6 +118,34 @@ public class CupoCreditoService {
 
 		}
 	}
+	
+	
+	
+	
+	public CupoCreditoDto AsignarCupoCreditoManual(long idFuncionario, long idCupoCredito, BigDecimal valor) throws Exception {
+		if(this.cupoCreditoRe.existsById(idCupoCredito)) {
+			this.cupoCreditoRe.UpdateCupoAsignado(valor, idCupoCredito);
+			CupoCredito cupo = this.cupoCreditoRe.findById(idCupoCredito).orElseThrow();
+			Funcionario funcionario = this.funcionarioRep.findById(idFuncionario).orElseThrow();
+			TipoLog tipoLog = this.tipoLogRep.findById(2).orElseThrow();
+			this.funcionarioLogRep.save(new FuncionarioLog(tipoLog, funcionario, cupo));
+			this.funcionarioLogRep.flush();
+			return this.cupoCreditoMapper.toDto(cupo);
+			
+		}else {
+			
+			throw new NoSuchElementException();
+			
+		}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Metodo que retorna todos los cupos de credito dentro e l abse de datos !!cuidado!!!

@@ -40,5 +40,11 @@ public class PaisController {
 	public ResponseEntity<PaisDto> setUpdatePuntaje(@RequestBody PaisDto paisDto) throws Exception{
 		return ResponseEntity.ok(this.paisService.updatePuntajePais(paisDto.getId(), paisDto.getamountPoints()));
 	}
+	
+	
+	@PutMapping("/valorPunto")
+	public ResponseEntity<PaisDto> setUpdateValorPunto(@RequestBody PaisDto paisDto) throws Exception{
+		return ResponseEntity.ok(this.paisService.updateValorPunto(paisDto.getId(), paisDto.getValuePoint()));
+	}
 
 }

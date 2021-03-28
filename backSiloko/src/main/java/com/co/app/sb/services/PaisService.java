@@ -1,5 +1,6 @@
 package com.co.app.sb.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,16 @@ public class PaisService {
 	public PaisDto updatePuntajePais(long idPais, int puntaje) throws Exception{
 		if(this.paisRep.existsById(idPais)) {
 			this.paisRep.ActualizarPuntaje(puntaje, idPais);
+			return this.paisMapper.toDto(this.paisRep.findById(idPais).orElseThrow());
+		}else {
+			throw new NoSuchElementException();
+		}
+	}
+	
+	
+	public PaisDto updateValorPunto(long idPais, BigDecimal puntaje) throws Exception{
+		if(this.paisRep.existsById(idPais)) {
+			this.paisRep.ActualizarValorPunto(puntaje, idPais);
 			return this.paisMapper.toDto(this.paisRep.findById(idPais).orElseThrow());
 		}else {
 			throw new NoSuchElementException();
