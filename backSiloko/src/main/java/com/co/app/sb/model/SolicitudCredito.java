@@ -59,6 +59,9 @@ public class SolicitudCredito implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name = "id_funcionario_alm", nullable = false)
 	private FuncionarioAlmacen funcionarioAlmacen;
+	
+	
+	private EstadoCredito estado;
 
 
 	public SolicitudCredito(String codigoCredito, Date fechaSolicitud, Date fechaFinalSolicitud, int numeroCuotas,
@@ -191,9 +194,16 @@ public class SolicitudCredito implements Serializable {
 	public void setFuncionarioAlmacen(FuncionarioAlmacen funcionarioAlmacen) {
 		this.funcionarioAlmacen = funcionarioAlmacen;
 	}
-	
-	
-	
+
+
+	public EstadoCredito getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(EstadoCredito estado) {
+		this.estado = estado;
+	}
 	
 	
 }

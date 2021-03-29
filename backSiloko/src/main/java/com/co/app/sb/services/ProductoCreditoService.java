@@ -25,5 +25,9 @@ public class ProductoCreditoService {
 		return this.productoMapper.toDto(producto);
 	}
 	
+	
+	public boolean getExistProduct(long idProducto) throws Exception{
+		return this.productoRep.existsById(idProducto);
+	}
 
 }

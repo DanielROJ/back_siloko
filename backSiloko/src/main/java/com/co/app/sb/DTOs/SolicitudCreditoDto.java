@@ -25,6 +25,9 @@ public class SolicitudCreditoDto {
 	private FuncionarioDto employManager;
 	
 	private FuncionarioAlmacenDto employStore;
+	
+	
+	private EstadoCreditoDto status;
 
 	public SolicitudCreditoDto(long id, String codeCredito, Date dateRequest, Date datefinalRequest, int numFees,
 			int numFeesPaid, Date dateLastPaid, ClienteDto client, ProductoCreditoDto product,
@@ -129,6 +132,14 @@ public class SolicitudCreditoDto {
 
 	public void setEmployStore(FuncionarioAlmacenDto employStore) {
 		this.employStore = employStore;
+	}
+
+	public EstadoCreditoDto getStatus() {
+		return status;
+	}
+
+	public void setStatus(EstadoCreditoDto status) {
+		this.status = status;
 	}	
 	
 }

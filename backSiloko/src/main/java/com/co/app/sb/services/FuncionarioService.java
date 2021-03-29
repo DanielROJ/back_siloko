@@ -69,6 +69,10 @@ public class FuncionarioService {
 	
 	
 	
+	public boolean getExistFuncionario(long idFuncionario) throws Exception{
+		return this.funcionarioRep.existsById(idFuncionario);
+	}
+	
 	
 	/**
 	 * Metodo que permite encontrar el email del funcionario basado en su codigo_empleado

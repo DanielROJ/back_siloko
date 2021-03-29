@@ -14,6 +14,7 @@ import org.springframework.web.util.WebUtils;
 import com.co.app.sb.util.ExceptionBody;
 import com.co.app.sb.util.GeneracionCupoException;
 import com.co.app.sb.util.LoginException;
+import com.co.app.sb.util.SolicitudCreditoException;
 
 /**
  * Clase controlador que permite gestionar los errores que se presenten en el procesamiento de las peticiones rest
@@ -33,13 +34,20 @@ public class ExceptionController {
 	private Logger log = Logger.getLogger(ExceptionController.class.getName());
 	
 	
-	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class, LoginException.class, GeneracionCupoException.class })
+	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class, LoginException.class, GeneracionCupoException.class,
+		SolicitudCreditoException.class})
 	public final ResponseEntity<ExceptionBody> handleException(Exception ex, WebRequest request) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		log.warning("Handling " + ex.getClass().getSimpleName() + " due to " + ex.getMessage());
 			
-		 if(ex instanceof GeneracionCupoException ) {
+		if(ex  instanceof SolicitudCreditoException ) {
+			
+		 	this.message = ex.getMessage();
+			this.bodyEx = new ExceptionBody(404, this.message);			
+		    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.NOT_FOUND, request);
+			
+		}else if(ex instanceof GeneracionCupoException ) {
 			 	this.message = "No se pudo generar el cupo credito";
 				this.bodyEx = new ExceptionBody(404, this.message);			
 			    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.NOT_FOUND, request);
