@@ -21,5 +21,12 @@ public interface SolicitudCreditoRepository extends JpaRepository<SolicitudCredi
 	
 	
 	Optional<SolicitudCredito> findBycodigoCredito(String codigo);
+	
+	
+	@Query(nativeQuery = true,
+	value ="SELECT id_estado_credito FROM solicitud_estado WHERE ID_SOLICITUD_CREDITO = ? ORDER BY ID_SOLICITUD_ESTADO ASC FETCH FIRST 1 ROWS ONLY")
+	Optional<Long> BuscarUltimoEstadoCredito(long idSolicitudCredito);
+	
+
 
 }

@@ -1,13 +1,10 @@
 package com.co.app.sb.services;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Map;
-import java.util.NoSuchElementException;
 
+import java.util.NoSuchElementException;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.co.app.sb.DTOs.EstadoCreditoDto;
 import com.co.app.sb.DTOs.SolicitudCreditoDto;
 import com.co.app.sb.Mappers.SolicitudCreditoMapper;
@@ -38,6 +35,8 @@ public class SolicitudCreditoService {
 	@Autowired
 	private SolicitudCreditoMapper solicitudMapper;
 
+	private Logger log = Logger.getLogger(SolicitudCreditoService.class.getName());
+
 	public SolicitudCreditoDto GenerarSolicitudCredito(SolicitudCreditoDto solicitudDto) throws Exception {
 		SolicitudCredito solicitud = this.solicitudMapper.toEntity(solicitudDto);
 		long idCliente = solicitud.getCliente().getIdCliente();
@@ -46,9 +45,9 @@ public class SolicitudCreditoService {
 
 		if (this.clienteSer.getExistClient(idCliente) && this.funcionarioService.getExistFuncionario(idFuncionario)
 				&& this.productoService.getExistProduct(idProducto)) {
-			
-			//SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");
-			//Date date = new Date(System.currentTimeMillis());
+
+			// SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");
+			// Date date = new Date(System.currentTimeMillis());
 
 			String parte_1_codigo = Long.toHexString(System.currentTimeMillis());
 
@@ -58,38 +57,45 @@ public class SolicitudCreditoService {
 
 			String codigo = parte_3_codigo + "-" + parte_2_codigo + "-" + parte_1_codigo;
 
-			Map<String, Long> mapOutVariables = SolicitudCreditoDAO.GenerarSolicitudCreditoCliente(idCliente,
-					idFuncionario, idProducto, codigo);
+			long idEstadoCredito = SolicitudCreditoDAO.GenerarSolicitudCreditoCliente(idCliente, idFuncionario,
+					idProducto, codigo);
 
-			if (mapOutVariables != null) {
+			if (this.estadoCreditoService.getExistEstadoCredito(idEstadoCredito)) {
 
-				long idEstadoCredito = mapOutVariables.get("idEstadoCredito");
-				
-				if (this.estadoCreditoService.getExistEstadoCredito(idEstadoCredito)) {
+				EstadoCreditoDto estadoC = this.estadoCreditoService.getEstadoCredito(idEstadoCredito);
+				SolicitudCredito sol = this.solicitudRep.findBycodigoCredito(codigo).orElseThrow();
+				this.solicitudRep.EnlazarEstadoSolicitud(sol.getIdSolicitudCredito(), estadoC.getId());
+				this.solicitudRep.flush();
 
-					EstadoCreditoDto estadoC = this.estadoCreditoService.getEstadoCredito(idEstadoCredito);
-					SolicitudCredito sol = this.solicitudRep.findBycodigoCredito(codigo).orElseThrow();
-					this.solicitudRep.EnlazarEstadoSolicitud(sol.getIdSolicitudCredito(), estadoC.getId());
-					this.solicitudRep.flush();
-					
-					SolicitudCreditoDto solDto =  this.solicitudMapper.toDto(sol);
-					solDto.setStatus(estadoC);
+				SolicitudCreditoDto solDto = this.solicitudMapper.toDto(sol);
+				solDto.setStatus(estadoC);
 
-					return solDto;
-
-				} else {
-					throw new SolicitudCreditoException("No se pudo generar la solicitud de credito");
-				}
+				return solDto;
 
 			} else {
-
 				throw new SolicitudCreditoException("No se pudo generar la solicitud de credito");
-
 			}
 
 		}
 
 		throw new NoSuchElementException();
+
+	}
+
+	public SolicitudCreditoDto getSolicitudByCodeAndIdCliente(String codigo, long documentoCliente) throws Exception {
+		log.info(codigo);
+		SolicitudCredito sol = this.solicitudRep.findBycodigoCredito(codigo).orElseThrow();
+		if (sol.getCliente().getDocumentoId() == documentoCliente) {
+			SolicitudCreditoDto solDto = this.solicitudMapper.toDto(sol);
+			long idEstadoCredito = this.solicitudRep.BuscarUltimoEstadoCredito(solDto.getId()).orElseThrow();
+			EstadoCreditoDto estadoC = this.estadoCreditoService.getEstadoCredito(idEstadoCredito);
+			solDto.setStatus(estadoC);
+			return solDto;
+		} else {
+
+			throw new NoSuchElementException();
+
+		}
 
 	}
 

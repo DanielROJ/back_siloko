@@ -7,5 +7,7 @@ import com.co.app.sb.model.EstadoCredito;
 
 @Repository
 public interface EstadoCreditoRepository extends JpaRepository<EstadoCredito, Long> {
+	
+	
 
 }

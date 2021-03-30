@@ -22,30 +22,23 @@ private static Connection con;
 	
 	
 	
-	public static Map<String, Long> GenerarSolicitudCreditoCliente(long idCliente, long idFuncionario, long idProducto,String codigoCredito) throws SQLException, Exception {
+	public static Long GenerarSolicitudCreditoCliente(long idCliente, long idFuncionario, long idProducto,String codigoCredito) throws SQLException, Exception {
 				GetConnection();
 				long idEstadoCredito = 0;
 				long status = 0;
 				
-				CallableStatement call_stm = con.prepareCall("{call ADMIN_SILOKO.GENERAR_SOLICITUD(?,?,?,?,?,?)}"); 
+				CallableStatement call_stm = con.prepareCall("{call ADMIN_SILOKO.GENERAR_SOLICITUD(?,?,?,?,?)}"); 
 				call_stm.setLong(1, idCliente);
 				call_stm.setLong(2, idFuncionario);
 				call_stm.setLong(3, idProducto);
 				call_stm.setString(4, codigoCredito);
 				
 				call_stm.registerOutParameter(5,2);
-				call_stm.registerOutParameter(6,2);
 				call_stm.executeUpdate();
 				idEstadoCredito = call_stm.getLong(5);
-				status =  call_stm.getLong(6);
 				call_stm.close();
 				
-				Map<String, Long> map =new Hashtable<String, Long>(2);
-				map.put("idEstadoCredito", idEstadoCredito);
-				map.put("status", status);
-				
-				
-				return map;
+				return idEstadoCredito;
 			
 		
 	}
