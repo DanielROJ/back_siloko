@@ -29,8 +29,7 @@ public interface SolicitudCreditoMapper {
 		@Mapping(source = "cliente", target = "client"),
 		@Mapping(source = "productoCredito", target = "product"),
 		@Mapping(source = "funcionarioSiloko", target = "employManager"),
-		@Mapping(source = "funcionarioAlmacen", target = "employStore"),
-		@Mapping(source = "estado", target = "status")
+		@Mapping(source = "funcionarioAlmacen", target = "employStore")
 	})
 	SolicitudCreditoDto toDto(SolicitudCredito solicitud);
 	
@@ -48,9 +47,7 @@ public interface SolicitudCreditoMapper {
 		@Mapping(source = "client", target = "cliente"),
 		@Mapping(source = "product", target = "productoCredito"),
 		@Mapping(source = "employManager", target = "funcionarioSiloko"),
-		@Mapping(source = "employStore", target = "funcionarioAlmacen"),
-		@Mapping(source = "status", target = "estado")
-		
+		@Mapping(source = "employStore", target = "funcionarioAlmacen")	
 	})
 	SolicitudCredito toEntity(SolicitudCreditoDto solicitudDto);
 	

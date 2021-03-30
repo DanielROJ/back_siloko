@@ -14,7 +14,7 @@ public class EstadoCredito {
 	@Id
 	@Column(name = "id_estado_credito")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idEstadoCredito;
+	private long idEstadoCredito;
 	
 	@Column(name = "estado")
 	private String estado;
@@ -33,11 +33,11 @@ public class EstadoCredito {
 		super();
 	}
 
-	public int getIdEstadoCredito() {
+	public long getIdEstadoCredito() {
 		return idEstadoCredito;
 	}
 
-	public void setIdEstadoCredito(int idEstadoCredito) {
+	public void setIdEstadoCredito(long idEstadoCredito) {
 		this.idEstadoCredito = idEstadoCredito;
 	}
 

@@ -12,7 +12,7 @@ public class SolicitudCreditoDAO {
 	
 private static Connection con;
 
-	
+	 
 	private static void GetConnection() throws SQLException {
 		if(con == null) {
 			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","admin_siloko","admin");;
@@ -22,11 +22,11 @@ private static Connection con;
 	
 	
 	
-	public static Map<String, Integer> GenerarSolicitudCreditoCliente(long idCliente, long idFuncionario, long idProducto,String codigoCredito) {
+	public static Map<String, Long> GenerarSolicitudCreditoCliente(long idCliente, long idFuncionario, long idProducto,String codigoCredito) {
 		try {
 				GetConnection();
-				int idEstadoCredito = 0;
-				int status = 0;
+				long idEstadoCredito = 0;
+				long status = 0;
 				
 				CallableStatement call_stm = con.prepareCall("{call ADMIN_SILOKO.GENERAR_SOLICITUD(?,?,?,?,?,?)}"); 
 				call_stm.setLong(1, idCliente);
@@ -37,11 +37,11 @@ private static Connection con;
 				call_stm.registerOutParameter(5,2);
 				call_stm.registerOutParameter(6,2);
 				call_stm.executeUpdate();
-				idEstadoCredito = call_stm.getInt(5);
-				status =  call_stm.getInt(6);
+				idEstadoCredito = call_stm.getLong(5);
+				status =  call_stm.getLong(6);
 				call_stm.close();
 				
-				Map<String, Integer> map =new Hashtable<String, Integer>(2);
+				Map<String, Long> map =new Hashtable<String, Long>(2);
 				map.put("idEstadoCredito", idEstadoCredito);
 				map.put("status", status);
 				
