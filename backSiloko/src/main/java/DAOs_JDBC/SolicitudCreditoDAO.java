@@ -22,8 +22,7 @@ private static Connection con;
 	
 	
 	
-	public static Map<String, Long> GenerarSolicitudCreditoCliente(long idCliente, long idFuncionario, long idProducto,String codigoCredito) {
-		try {
+	public static Map<String, Long> GenerarSolicitudCreditoCliente(long idCliente, long idFuncionario, long idProducto,String codigoCredito) throws SQLException, Exception {
 				GetConnection();
 				long idEstadoCredito = 0;
 				long status = 0;
@@ -48,10 +47,7 @@ private static Connection con;
 				
 				return map;
 			
-		} catch (SQLException e) {
-			System.out.println("Exception Occured "+e.getMessage());
-			return null;
-		}
+		
 	}
 
 }

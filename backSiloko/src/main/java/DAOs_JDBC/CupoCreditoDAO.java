@@ -11,7 +11,7 @@ public class CupoCreditoDAO {
 	private static Connection con;
 
 	
-	private static void GetConnection() throws SQLException {
+	private static void GetConnection() throws SQLException{
 		if(con == null) {
 			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","admin_siloko","admin");;
 		}
@@ -20,8 +20,8 @@ public class CupoCreditoDAO {
 	
 	
 	
-	public static int GenerarCupoCreditoCliente(long idCliente) {
-		try {
+	public static int GenerarCupoCreditoCliente(long idCliente) throws SQLException, Exception {
+	
 				GetConnection();
 				int response = 0;
 				
@@ -34,10 +34,7 @@ public class CupoCreditoDAO {
 				
 				return response;
 			
-		} catch (SQLException e) {
-			System.out.println("Exception Occured "+e.getMessage());
-			return 0;
-		}
+		
 	}
 	
 	

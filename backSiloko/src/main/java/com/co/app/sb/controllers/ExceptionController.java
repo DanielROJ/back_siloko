@@ -1,6 +1,7 @@
 package com.co.app.sb.controllers;
 
 
+import java.sql.SQLException;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
@@ -35,7 +36,7 @@ public class ExceptionController {
 	
 	
 	@ExceptionHandler({ NoSuchElementException.class, ClassCastException.class, LoginException.class, GeneracionCupoException.class,
-		SolicitudCreditoException.class})
+		SolicitudCreditoException.class, SQLException.class})
 	public final ResponseEntity<ExceptionBody> handleException(Exception ex, WebRequest request) {
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -47,8 +48,8 @@ public class ExceptionController {
 			this.bodyEx = new ExceptionBody(404, this.message);			
 		    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.NOT_FOUND, request);
 			
-		}else if(ex instanceof GeneracionCupoException ) {
-			 	this.message = "No se pudo generar el cupo credito";
+		}else if(ex instanceof GeneracionCupoException ||  ex instanceof SQLException) {
+			 	this.message = ex.getMessage().split(";")[1];
 				this.bodyEx = new ExceptionBody(404, this.message);			
 			    return handleExceptionInternal(ex, this.bodyEx, headers, HttpStatus.NOT_FOUND, request);
 	
