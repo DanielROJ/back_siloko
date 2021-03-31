@@ -1,21 +1,22 @@
 package com.co.app.sb.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.co.app.sb.model.SolicitudCredito;
 
 @Repository
-public interface SolicitudCreditoRepository extends JpaRepository<SolicitudCredito, Long> {
+public interface SolicitudCreditoRepository extends JpaRepository<SolicitudCredito, Long>, PagingAndSortingRepository<SolicitudCredito, Long> {
 	
 	@Transactional()
 	@Modifying(flushAutomatically = false)
@@ -39,6 +40,12 @@ public interface SolicitudCreditoRepository extends JpaRepository<SolicitudCredi
 	
 	@Query(value = "SELECT sc FROM SolicitudCredito sc WHERE sc.idSolicitudCredito= :id")
 	Optional<SolicitudCredito> BuscaPorId(@Param("id") long idSolicitud);
+	
+	
+	
+	List<SolicitudCredito> findAllBycliente_idCliente(long idCliente, Pageable pageable);
+	
+	long countBycliente_idCliente(long idCliente);
 	
 	
 }

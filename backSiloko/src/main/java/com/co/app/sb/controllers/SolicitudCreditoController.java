@@ -3,6 +3,7 @@ package com.co.app.sb.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.co.app.sb.DTOs.SolicitudCreditoDto;
-import com.co.app.sb.model.SolicitudCredito;
 import com.co.app.sb.services.SolicitudCreditoService;
-import com.co.app.sb.util.SolicitudCreditoException;
 
 @RestController()
 @RequestMapping(path = "/api/solicitudCredito", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -26,6 +24,14 @@ public class SolicitudCreditoController {
 	@Autowired
 	private SolicitudCreditoService solicitudService;
 	
+	@GetMapping("/cliente/list")
+	public ResponseEntity<List<SolicitudCreditoDto>> getListSolicitudesByIdCliente(@RequestParam("id")long idCliente, @RequestParam("nPage") int nPage, @RequestParam("nRows") int nRows) throws Exception{
+		List<SolicitudCreditoDto> listSolDto = this.solicitudService.getListSolicitudesPageable(idCliente, nPage, nRows);
+		long countLimit = this.solicitudService.getCountNumberRowsSolicitudCredito(idCliente);
+		 HttpHeaders responseHeaders = new HttpHeaders();
+		    responseHeaders.set("rows-limit", countLimit+"");
+		return  ResponseEntity.ok().headers(responseHeaders).body(listSolDto);
+	}
 	
 	
 	@PostMapping("/generar")
@@ -48,6 +54,8 @@ public class SolicitudCreditoController {
 	res =  this.solicitudService.setIncioFinanciacionSolicitud(idSolicitud, idFuncionarioAlm, numeroCoutas);
 		return ResponseEntity.ok(res);
 	}
+	
+	
 	
 	
 	/*

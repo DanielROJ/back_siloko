@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.co.app.sb.DTOs.EstadoCreditoDto;
 import com.co.app.sb.DTOs.SolicitudCreditoDto;
@@ -146,6 +149,25 @@ public class SolicitudCreditoService {
 			throw new NoSuchElementException();
 		}
 	
+	}
+	
+	
+	
+	public List<SolicitudCreditoDto> getListSolicitudesPageable(long idCliente, int numberPage, int numberRegisters)throws Exception{
+		Pageable objectPaginacion =  PageRequest.of(numberPage, numberRegisters,Sort.by("idSolicitudCredito").descending());
+		List<SolicitudCredito> listSol = this.solicitudRep.findAllBycliente_idCliente(idCliente, objectPaginacion);
+		List<SolicitudCreditoDto> listSolDto =this.solicitudMapper.entityListToDtoList(listSol);
+		for (SolicitudCreditoDto solicitudCreditoDto : listSolDto) {
+			long idEstadoCredito = this.solicitudRep.BuscarUltimoEstadoCredito(solicitudCreditoDto.getId()).orElseThrow();
+			EstadoCreditoDto estadoC = this.estadoCreditoService.getEstadoCredito(idEstadoCredito);
+			solicitudCreditoDto.setStatus(estadoC);
+		}
+		return listSolDto;
+	}
+	
+	
+	public long getCountNumberRowsSolicitudCredito(long idCliente) throws Exception{
+		return this.solicitudRep.countBycliente_idCliente(idCliente);
 	}
 	
 	
