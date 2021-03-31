@@ -16,9 +16,14 @@ import javax.persistence.Table;
 @Table(name = "SOLICITUD_CREDITO")
 public class SolicitudCredito implements Serializable {
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id_solicitud_credito")
+	@Column(name="ID_SOLICITUD_CREDITO", unique=true, nullable=false, precision=10)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idSolicitudCredito;
 	

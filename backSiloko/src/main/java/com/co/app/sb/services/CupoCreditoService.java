@@ -121,7 +121,14 @@ public class CupoCreditoService {
 	
 	
 	
-	
+	/**
+	 * Meotod que permite actualizar el cupo asignado a un cliente de forma manual.
+	 * @param idFuncionario
+	 * @param idCupoCredito
+	 * @param valor
+	 * @return
+	 * @throws Exception
+	 */
 	public CupoCreditoDto AsignarCupoCreditoManual(long idFuncionario, long idCupoCredito, BigDecimal valor) throws Exception {
 		if(this.cupoCreditoRe.existsById(idCupoCredito)) {
 			this.cupoCreditoRe.UpdateCupoAsignado(valor, idCupoCredito);
@@ -141,8 +148,24 @@ public class CupoCreditoService {
 	}
 	
 	
-	
-	
+	/**
+	 * Meotodo que permite actualizar el cupo de credito utlizado.
+	 * @param idCupoCredito
+	 * @param valor
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean UpdateCupoUso(long idCupoCredito, BigDecimal valor)  throws Exception{
+		if(this.cupoCreditoRe.existsById(idCupoCredito)) {
+			this.cupoCreditoRe.UpdateValorUsoCupo(valor, idCupoCredito);
+			this.cupoCreditoRe.flush();
+			return true;
+		}else {
+			
+			throw new NoSuchElementException();
+			
+		}
+	}
 	
 	
 	

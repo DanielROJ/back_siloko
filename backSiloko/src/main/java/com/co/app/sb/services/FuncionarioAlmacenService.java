@@ -18,5 +18,12 @@ public class FuncionarioAlmacenService {
 	public String getCorreoFuncionarioAlmacen(long codigo) throws Exception {
 		return this.funcionarioAlmRep.findEmail(codigo).orElseThrow();
 	}
+	
+	
+	public boolean getExistFuncionarioAlmacen(long idFuncionario) throws Exception{
+		return this.funcionarioAlmRep.existsById(idFuncionario);
+	}
+	
+	
 
 }

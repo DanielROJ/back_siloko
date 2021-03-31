@@ -27,4 +27,9 @@ public interface CupoCreditoRepository extends JpaRepository<CupoCredito, Long> 
 	@Transactional
 	@Query(value = "UPDATE CupoCredito cc SET cc.valorTotalCupo = :valorCupo WHERE cc.idCupoCredito = :id ")
 	void UpdateCupoAsignado(@Param("valorCupo") BigDecimal valorCupo,@Param("id") long idCredito);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE CupoCredito cc SET cc.valorCupoUso = :valorCupo WHERE cc.idCupoCredito = :id ")
+	void UpdateValorUsoCupo(@Param("valorCupo") BigDecimal valorCupo,@Param("id") long idCredito);
 }

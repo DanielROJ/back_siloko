@@ -1,6 +1,8 @@
 package com.co.app.sb.services;
 
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,16 @@ public class SolicitudCreditoService {
 
 	@Autowired
 	private SolicitudCreditoMapper solicitudMapper;
+	
+	@Autowired
+	private FuncionarioAlmacenService funcionarioAlmService;
+	
+	@Autowired
+	private CupoCreditoService cupoCreditoService;
+	
+	
+	
+	
 
 	private Logger log = Logger.getLogger(SolicitudCreditoService.class.getName());
 
@@ -83,7 +95,6 @@ public class SolicitudCreditoService {
 	}
 
 	public SolicitudCreditoDto getSolicitudByCodeAndIdCliente(String codigo, long documentoCliente) throws Exception {
-		log.info(codigo);
 		SolicitudCredito sol = this.solicitudRep.findBycodigoCredito(codigo).orElseThrow();
 		if (sol.getCliente().getDocumentoId() == documentoCliente) {
 			SolicitudCreditoDto solDto = this.solicitudMapper.toDto(sol);
@@ -98,5 +109,83 @@ public class SolicitudCreditoService {
 		}
 
 	}
+	
+	
+	
+	public boolean setIncioFinanciacionSolicitud(long idSolicitud,long idFuncionarioAlm, int numeroCoutas) throws Exception{
+		
+		if(this.solicitudRep.existsById(idSolicitud) && this.funcionarioAlmService.getExistFuncionarioAlmacen(idFuncionarioAlm) ) {
+			
+			log.info("idSolicitud : "+idSolicitud);
+			
+			SolicitudCredito sol = this.solicitudRep.BuscaPorId(idSolicitud).orElseThrow();
+			log.info("sol lo tengo");
+		
+			BigDecimal precioProducto = sol.getProductoCredito().getValorProducto();
+			
+			BigDecimal cupoTotal = sol.getCliente().getCupoCredito().getValorTotalCupo();
+			
+			BigDecimal cupoUso = sol.getCliente().getCupoCredito().getValorCupoUso();
+			
+			BigDecimal cupoDisponible = cupoTotal.subtract(cupoUso);
+			
+		    if(precioProducto.doubleValue()< cupoDisponible.doubleValue()) {
+		    	cupoUso = cupoUso.add(precioProducto);
+		    	long idCupoCredito = sol.getCliente().getCupoCredito().getIdCupoCredito(); 
+		    	this.cupoCreditoService.UpdateCupoUso(idCupoCredito,cupoUso);
+		    	this.solicitudRep.ParametrosFinanciacion(numeroCoutas, idFuncionarioAlm, idSolicitud);
+				this.solicitudRep.EnlazarEstadoSolicitud(idSolicitud,7);
+				this.solicitudRep.flush();
+				return true;
+		    	
+		    }else {
+		    	throw new SolicitudCreditoException("No posee cupo suficiente");
+		    }
+			
+		}else {
+			throw new NoSuchElementException();
+		}
+	
+	}
+	
+	
+	
+	
+	
+	public List<SolicitudCredito> getListSolicitudes() throws Exception{
+		
+		List<SolicitudCredito> solList = this.solicitudRep.findAll();
+		return solList;
+	}
+	
+	
+	public SolicitudCredito getSolicitudCredito(long idSolicitud) {
+		return this.solicitudRep.BuscaPorId(idSolicitud).orElseThrow();
+	}
+	
+	
+	public boolean existSolicitud() {
+		return this.solicitudRep.existsById((long)24);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
