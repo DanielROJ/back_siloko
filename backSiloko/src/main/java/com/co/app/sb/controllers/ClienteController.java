@@ -101,6 +101,13 @@ public class ClienteController {
 	}
 	
 	
+	/**
+	 * Meotodo que permite asignar manualmente un cupo de credito a un usuario
+	 * @param idFuncionario
+	 * @param cupo
+	 * @returnResponseEntity<CupoCreditoDto>
+	 * @throws Exception
+	 */
 	@PutMapping("/cupoCredito/manual")
 	public ResponseEntity<CupoCreditoDto> setSaldoCupoCredito(@RequestParam(value = "funcionario") long idFuncionario, @RequestBody CupoCreditoDto cupo)throws Exception{
 		CupoCreditoDto res = this.cupoCreditoService.AsignarCupoCreditoManual(idFuncionario,  cupo.getId(), cupo.getTotalSizeCredit());
@@ -110,10 +117,28 @@ public class ClienteController {
 	
 	
 	
-	
+	/*
 	@GetMapping("/cupoCredito")
 	public ResponseEntity<List<CupoCredito>> listCupo(){
 		return ResponseEntity.ok(this.cupoCreditoService.listCupoCredito());
 	}
+	*/
+	
+	
+	/**
+	 * Metodo que busca un cliente por su id en base de datos
+	 * @param idCliente
+	 * @return
+	 * @throws Exception
+	 */
+	@GetMapping("")
+	public ResponseEntity<ClienteDto> getClienteByIdCliente(@RequestParam("value") long idCliente)throws Exception{
+		ClienteDto clienteDto = this.clienteService.getClienteById(idCliente);
+		return ResponseEntity.ok(clienteDto);
+	}
+	
+	
+	
+	
 	
 }
