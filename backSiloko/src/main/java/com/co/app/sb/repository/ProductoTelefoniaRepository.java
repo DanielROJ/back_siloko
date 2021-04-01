@@ -15,5 +15,8 @@ public interface ProductoTelefoniaRepository extends JpaRepository<ProductoTelef
 	@Transactional
 	@Query(value="UPDATE ProductoTelefonia pt SET pt.puntajeProductoTelefonia = :puntaje  WHERE pt.idProductoTelefonia = :id")
 	void ActualizarPuntaje(@Param("puntaje") int puntaje, @Param("id") long idEstrato); 
+	
+	
+	
 
 }

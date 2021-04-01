@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.co.app.sb.DTOs.ClienteDto;
 import com.co.app.sb.DTOs.CupoCreditoDto;
-import com.co.app.sb.model.CupoCredito;
 import com.co.app.sb.services.ClienteService;
 import com.co.app.sb.services.CupoCreditoService;
 
