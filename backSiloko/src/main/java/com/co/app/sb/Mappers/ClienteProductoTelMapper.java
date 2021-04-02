@@ -20,7 +20,7 @@ public interface ClienteProductoTelMapper {
 		@Mapping(source = "idClienteProductoTel",target = "id"),
 		@Mapping(source = "productoTel",target = "productTel"),
 		@Mapping(source = "precioProducto",target = "priceProduct"),
-		@Mapping(source = "numeroLinea",target = "")
+		@Mapping(source = "numeroLinea",target = "numberLine")
 	})
 	ClienteProductoTelDto toDto(ClienteProductoTel clienteProducto);
 	

@@ -35,6 +35,20 @@ public class ClienteProductoTel {
 	public ClienteProductoTel(){
 		
 	}
+	
+	
+
+
+	public ClienteProductoTel(long idClienteProductoTel, ProductoTelefonia productoTel, BigDecimal precioProducto,
+			long numeroLinea) {
+		super();
+		this.idClienteProductoTel = idClienteProductoTel;
+		this.productoTel = productoTel;
+		this.precioProducto = precioProducto;
+		this.numeroLinea = numeroLinea;
+	}
+
+
 
 
 	public long getIdClienteProductoTel() {

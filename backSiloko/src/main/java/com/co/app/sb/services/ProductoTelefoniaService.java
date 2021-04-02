@@ -19,13 +19,23 @@ public class ProductoTelefoniaService {
 	private ProductoTelefoniaMapper productoTelMapper;
 	
 	
-	
+	/**
+	 * Metodo que devuelve todos los productos de telefonia de la bade de datos !!cuidado!!
+	 * @return
+	 * @throws Exception
+	 */
 	public  List<ProductoTelefoniaDto> getListProductosTelefonia() throws Exception{
 		return this.productoTelMapper.entityListToDtoList(this.productoTelRep.findAll());
 	}
 	
 	
-	
+	/**
+	 * Metodo que actualiza elpuntaje de credito de un producto de telefonia
+	 * @param idProductoTelefonia
+	 * @param puntaje
+	 * @return
+	 * @throws Exception
+	 */
 	public ProductoTelefoniaDto  updatePuntajeProductoTelfonia(long idProductoTelefonia, int puntaje) throws Exception{
 		if(this.productoTelRep.existsById(idProductoTelefonia)) {
 			this.productoTelRep.ActualizarPuntaje(puntaje, idProductoTelefonia);
@@ -34,5 +44,8 @@ public class ProductoTelefoniaService {
 			throw new NoSuchElementException();
 		}
 	}
+	
+	
+	
 
 }
