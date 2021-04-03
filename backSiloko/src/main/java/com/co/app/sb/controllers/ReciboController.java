@@ -1,7 +1,6 @@
 package com.co.app.sb.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.co.app.sb.DTOs.ClienteProductoTelDto;
 import com.co.app.sb.DTOs.ReciboDto;
+import com.co.app.sb.DTOs.SolicitudCreditoDto;
+import com.co.app.sb.model.ClienteProductoTel;
 import com.co.app.sb.services.ReciboService;
 
 @RestController()
@@ -39,4 +41,19 @@ public class ReciboController {
 		return ResponseEntity.ok(res);
 	}
 
+	
+	@GetMapping("/solicitudes/list")
+	public ResponseEntity<List<SolicitudCreditoDto>> getListSolicitudes(@RequestParam("idRecibo")long idRecibo) throws Exception{
+		List<SolicitudCreditoDto> listSolicitudes = this.reciboService.getListSolicitudesRecibos(idRecibo);
+		return ResponseEntity.ok(listSolicitudes);
+	}
+	
+	
+	@GetMapping("/productos/list")
+	public ResponseEntity<List<ClienteProductoTelDto>> getListProductos(@RequestParam("idRecibo")long idRecibo) throws Exception{
+		List<ClienteProductoTelDto> listCLienteProducto = this.reciboService.getListProductosRecibos(idRecibo);
+		return  ResponseEntity.ok(listCLienteProducto);
+	}
+	
+	
 }

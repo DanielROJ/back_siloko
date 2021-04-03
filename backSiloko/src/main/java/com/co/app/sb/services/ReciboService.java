@@ -8,9 +8,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.co.app.sb.DTOs.ClienteProductoTelDto;
 import com.co.app.sb.DTOs.ReciboDto;
+import com.co.app.sb.DTOs.SolicitudCreditoDto;
+import com.co.app.sb.Mappers.ClienteProductoTelMapper;
 import com.co.app.sb.Mappers.ReciboMapper;
+import com.co.app.sb.Mappers.SolicitudCreditoMapper;
+import com.co.app.sb.model.ClienteProductoTel;
 import com.co.app.sb.model.Recibo;
+import com.co.app.sb.model.SolicitudCredito;
+import com.co.app.sb.repository.ClienteProductoTelRepository;
 import com.co.app.sb.repository.ReciboRepository;
 
 import DAOs_JDBC.ReciboDAO;
@@ -24,8 +31,17 @@ public class ReciboService {
 	@Autowired
 	private ReciboMapper reciboMapper;
 	
+	@Autowired
+	private SolicitudCreditoMapper solicitudMapper;
+	
+	@Autowired
+	private ClienteProductoTelMapper clienteProductoMapper;
+	
+	@Autowired
+	private ClienteProductoTelRepository clienteProductoTelRep;
+	
 	/**
-	 * Metodo que permite traer los recibos generados de un cliente, con paginación incluida
+	 * Metodo que permite traer los recibos generados de un cliente, con paginacion incluida
 	 * @param idCliente
 	 * @param numberPage
 	 * @param numberRegisters
@@ -37,6 +53,7 @@ public class ReciboService {
 		List<Recibo> listRecibo = this.reciboRep.findAllBycliente_idCliente(idCliente, objectPaginacion);
 		return this.reciboMapper.entityListToDtoList(listRecibo);
 	}
+	
 	
 	
 	public long getCountNumberRowsRecibosCliente(long idCliente) throws Exception{
@@ -55,6 +72,17 @@ public class ReciboService {
 	}
 	
 	
+	public List<SolicitudCreditoDto> getListSolicitudesRecibos(long idRecibo) throws Exception{
+		List<SolicitudCredito> listSolicitudes =  this.reciboRep.GetSolicitudesRecibos(idRecibo);
+		return this.solicitudMapper.entityListToDtoList(listSolicitudes);
+	}
+	
+	public List<ClienteProductoTelDto> getListProductosRecibos(long idRecibo) throws Exception{
+		List<ClienteProductoTel> listClienteProducto = this.clienteProductoTelRep.ReciboProductos(idRecibo);
+		return this.clienteProductoMapper.entityListToDtoList(listClienteProducto);
+	}
+	
+
 	
 
 }
