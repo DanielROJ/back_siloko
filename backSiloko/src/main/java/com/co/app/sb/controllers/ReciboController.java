@@ -23,7 +23,7 @@ public class ReciboController {
 	private ReciboService reciboService;
 	
 	
-	@GetMapping("cliente/list")
+	@GetMapping("/cliente/list")
 	public ResponseEntity<List<ReciboDto>> getListRecibosByIdCliente(@RequestParam("id")long idCliente, @RequestParam("nPage") int nPage, @RequestParam("nRows") int nRows) throws Exception{
 		List<ReciboDto> listReciboDto =  this.reciboService.getListRecibosByIdCliente(idCliente, nPage, nRows);
 		HttpHeaders responseHeaders = new HttpHeaders();
