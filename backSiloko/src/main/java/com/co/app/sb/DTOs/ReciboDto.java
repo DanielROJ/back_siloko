@@ -6,30 +6,29 @@ import java.sql.Date;
 public class ReciboDto {
 
 	private long id;
-	
+
 	private BigDecimal valTotalCuotaCredit;
-	
+
 	private BigDecimal valTotalProduct;
-	
+
 	private BigDecimal valTotalCredit;
-	
+
 	private BigDecimal total;
-	
+
 	private int statusPay;
-	
+
 	private Date dateGenerated;
-	
+
 	private Date dateLimPay;
-	
-	
-	
+
+	private ClienteDto client;
 
 	public ReciboDto() {
 		super();
 	}
 
 	public ReciboDto(long id, BigDecimal valTotalCuotaCredit, BigDecimal valTotalProduct, BigDecimal valTotalCredit,
-			BigDecimal total, int statusPay, Date dateGenerated, Date dateLimPay) {
+			BigDecimal total, int statusPay, Date dateGenerated, Date dateLimPay, ClienteDto client) {
 		super();
 		this.id = id;
 		this.valTotalCuotaCredit = valTotalCuotaCredit;
@@ -39,6 +38,15 @@ public class ReciboDto {
 		this.statusPay = statusPay;
 		this.dateGenerated = dateGenerated;
 		this.dateLimPay = dateLimPay;
+		this.client = client;
+	}
+
+	public ClienteDto getClient() {
+		return client;
+	}
+
+	public void setClient(ClienteDto client) {
+		this.client = client;
 	}
 
 	public long getId() {
@@ -104,6 +112,5 @@ public class ReciboDto {
 	public void setDateLimPay(Date dateLimPay) {
 		this.dateLimPay = dateLimPay;
 	}
-	
-	
+
 }

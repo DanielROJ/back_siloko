@@ -38,6 +38,19 @@ public class CupoCreditoDAO {
 	}
 	
 	
+	public static int ProcesoMasivoCuposCredito()throws SQLException, Exception{
+		GetConnection();
+		int response = 0;
+		CallableStatement call_stm = con.prepareCall("{call ADMIN_SILOKO.BULLK_CALCULO_CUPO(?)}"); 
+		call_stm.registerOutParameter(1,2);
+		call_stm.executeUpdate();
+		response = call_stm.getInt(1);
+		call_stm.close();
+		
+		return response;
+	}
+	
+	
 	
 	
 

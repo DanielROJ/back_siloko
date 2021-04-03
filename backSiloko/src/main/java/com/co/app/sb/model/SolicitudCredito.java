@@ -39,12 +39,16 @@ public class SolicitudCredito implements Serializable {
 	@Column(name = "numero_cuotas")
 	private int numeroCuotas;
 	
-	@Column(name = "numeroCuotasPagas")
+	@Column(name = "numero_cuotas_pagas")
 	private int numeroCuotasPagas;
+	
+
+	@Column(name="numero_cuotas_gener")
+	private int numeroCuotasGeneradas;
 	
 	@Column(name="fecha_ultimo_pago")
 	private Date fechaUltimoPago;
-	
+
 
 	@ManyToOne()
 	@JoinColumn(name = "id_cliente", nullable = false)
@@ -66,15 +70,21 @@ public class SolicitudCredito implements Serializable {
 	private FuncionarioAlmacen funcionarioAlmacen;
 	
 
-	public SolicitudCredito(String codigoCredito, Date fechaSolicitud, Date fechaFinalSolicitud, int numeroCuotas,
-			int numeroCuotasPagas, Date fechaUltimoPago, Cliente cliente, ProductoCredito productoCredito,
-			Funcionario funcionarioSiloko, FuncionarioAlmacen funcionarioAlmacen) {
+
+
+
+	public SolicitudCredito(long idSolicitudCredito, String codigoCredito, Date fechaSolicitud,
+			Date fechaFinalSolicitud, int numeroCuotas, int numeroCuotasPagas, int numeroCuotasGeneradas,
+			Date fechaUltimoPago, Cliente cliente, ProductoCredito productoCredito, Funcionario funcionarioSiloko,
+			FuncionarioAlmacen funcionarioAlmacen) {
 		super();
+		this.idSolicitudCredito = idSolicitudCredito;
 		this.codigoCredito = codigoCredito;
 		this.fechaSolicitud = fechaSolicitud;
 		this.fechaFinalSolicitud = fechaFinalSolicitud;
 		this.numeroCuotas = numeroCuotas;
 		this.numeroCuotasPagas = numeroCuotasPagas;
+		this.numeroCuotasGeneradas = numeroCuotasGeneradas;
 		this.fechaUltimoPago = fechaUltimoPago;
 		this.cliente = cliente;
 		this.productoCredito = productoCredito;
@@ -196,5 +206,17 @@ public class SolicitudCredito implements Serializable {
 	public void setFuncionarioAlmacen(FuncionarioAlmacen funcionarioAlmacen) {
 		this.funcionarioAlmacen = funcionarioAlmacen;
 	}
+
+
+	public int getNumeroCuotasGeneradas() {
+		return numeroCuotasGeneradas;
+	}
+
+
+	public void setNumeroCuotasGeneradas(int numeroCuotasGeneradas) {
+		this.numeroCuotasGeneradas = numeroCuotasGeneradas;
+	}
+	
+	
 
 }

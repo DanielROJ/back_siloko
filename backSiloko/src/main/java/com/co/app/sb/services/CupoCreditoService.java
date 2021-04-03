@@ -169,6 +169,19 @@ public class CupoCreditoService {
 	
 	
 	
+	public boolean ExecuteProcesoMasivoGenerarCupo() throws Exception{
+		int res = CupoCreditoDAO.ProcesoMasivoCuposCredito();
+		log.info(res+"");
+		if(res>=1) {
+			return true;
+		}else {
+			return false;
+		}
+					
+	}
+	
+	
+	
 
 	/**
 	 * Metodo que retorna todos los cupos de credito dentro e l abse de datos !!cuidado!!!

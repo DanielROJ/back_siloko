@@ -144,5 +144,24 @@ public class ClienteController {
 		List<ClienteProductoTelDto> listClientesProductos = this.clienteService.getListClienteProductos(idCliente);
 		return ResponseEntity.ok(listClientesProductos);
 	}
+	
+	
+	
+	
+	@PostMapping("/masivo")
+	public ResponseEntity<Boolean> ExecuteProcesoMasivo() throws Exception{
+	boolean res = this.cupoCreditoService.ExecuteProcesoMasivoGenerarCupo();
+	
+	return ResponseEntity.ok(res);
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

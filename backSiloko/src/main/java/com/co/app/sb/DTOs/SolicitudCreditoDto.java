@@ -16,6 +16,8 @@ public class SolicitudCreditoDto {
 	
 	private int numFeesPaid;
 	
+	private int numFeesGenerated;
+	
 	private Date dateLastPaid;
 	
 	private ClienteDto client;
@@ -29,9 +31,11 @@ public class SolicitudCreditoDto {
 	
 	private EstadoCreditoDto status;
 
+	
+
 	public SolicitudCreditoDto(long id, String codeCredito, Date dateRequest, Date datefinalRequest, int numFees,
-			int numFeesPaid, Date dateLastPaid, ClienteDto client, ProductoCreditoDto product,
-			FuncionarioDto employManager, FuncionarioAlmacenDto employStore) {
+			int numFeesPaid, int numFeesGenerated, Date dateLastPaid, ClienteDto client, ProductoCreditoDto product,
+			FuncionarioDto employManager, FuncionarioAlmacenDto employStore, EstadoCreditoDto status) {
 		super();
 		this.id = id;
 		this.codeCredito = codeCredito;
@@ -39,11 +43,13 @@ public class SolicitudCreditoDto {
 		this.datefinalRequest = datefinalRequest;
 		this.numFees = numFees;
 		this.numFeesPaid = numFeesPaid;
+		this.numFeesGenerated = numFeesGenerated;
 		this.dateLastPaid = dateLastPaid;
 		this.client = client;
 		this.product = product;
 		this.employManager = employManager;
 		this.employStore = employStore;
+		this.status = status;
 	}
 
 	public long getId() {
@@ -140,6 +146,17 @@ public class SolicitudCreditoDto {
 
 	public void setStatus(EstadoCreditoDto status) {
 		this.status = status;
+	}
+
+	public int getNumFeesGenerated() {
+		return numFeesGenerated;
+	}
+
+	public void setNumFeesGenerated(int numFeesGenerated) {
+		this.numFeesGenerated = numFeesGenerated;
 	}	
+	
+	
+	
 	
 }

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -39,13 +41,20 @@ public class Recibo {
 	
 	@Column(name = "FECHA_LIM_PAGO")
 	private Date fechaLimPago;
+	
+	@ManyToOne()
+	@JoinColumn(name = "id_cliente", nullable = false)
+	private Cliente cliente;
 
 	public Recibo() {
 		super();
 	}
 
+	
+
 	public Recibo(long idRecibo, BigDecimal valorTotalCreditos, BigDecimal valorTotalProductosTel,
-			BigDecimal totalPagarCreditos, BigDecimal total, int estadoPago, Date fechaGeneracion, Date fechaLimPago) {
+			BigDecimal totalPagarCreditos, BigDecimal total, int estadoPago, Date fechaGeneracion, Date fechaLimPago,
+			Cliente cliente) {
 		super();
 		this.idRecibo = idRecibo;
 		this.valorTotalCreditos = valorTotalCreditos;
@@ -55,7 +64,10 @@ public class Recibo {
 		this.estadoPago = estadoPago;
 		this.fechaGeneracion = fechaGeneracion;
 		this.fechaLimPago = fechaLimPago;
+		this.cliente = cliente;
 	}
+
+
 
 	public long getIdRecibo() {
 		return idRecibo;
@@ -120,7 +132,18 @@ public class Recibo {
 	public void setFechaLimPago(Date fechaLimPago) {
 		this.fechaLimPago = fechaLimPago;
 	}
-	
+
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	
 
 }
