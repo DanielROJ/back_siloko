@@ -19,9 +19,9 @@ public interface ReciboMapper {
 	
 	@Mappings({
 		@Mapping(source = "idRecibo", target = "id"),
-		@Mapping(source = "valorTotalCreditos", target = "valTotalCuotaCredit"),
+		@Mapping(source = "valorTotalCreditos", target = "valTotalCredit"),
 		@Mapping(source = "valorTotalProductosTel", target = "valTotalProduct"),
-		@Mapping(source = "totalPagarCreditos", target = "valTotalCredit"),
+		@Mapping(source = "totalPagarCreditos", target = "valTotalCuotaCredit"),
 		@Mapping(source = "total", target = "total"),
 		@Mapping(source = "estadoPago", target = "statusPay"),
 		@Mapping(source = "fechaGeneracion", target = "dateGenerated"),
@@ -33,9 +33,9 @@ public interface ReciboMapper {
 	
 	@Mappings({
 		@Mapping(source = "id", target = "idRecibo"),
-		@Mapping(source = "valTotalCuotaCredit", target = "valorTotalCreditos"),
+		@Mapping(source = "valTotalCredit", target = "valorTotalCreditos"),
 		@Mapping(source = "valTotalProduct", target = "valorTotalProductosTel"),
-		@Mapping(source = "valTotalCredit", target = "totalPagarCreditos"),
+		@Mapping(source = "valTotalCuotaCredit", target = "totalPagarCreditos"),
 		@Mapping(source = "total", target = "total"),
 		@Mapping(source = "statusPay", target = "estadoPago"),
 		@Mapping(source = "dateGenerated", target = "fechaGeneracion"),

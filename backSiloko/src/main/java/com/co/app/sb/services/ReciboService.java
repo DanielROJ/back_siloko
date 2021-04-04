@@ -19,6 +19,7 @@ import com.co.app.sb.model.Recibo;
 import com.co.app.sb.model.SolicitudCredito;
 import com.co.app.sb.repository.ClienteProductoTelRepository;
 import com.co.app.sb.repository.ReciboRepository;
+import com.co.app.sb.repository.SolicitudCreditoRepository;
 
 import DAOs_JDBC.ReciboDAO;
 
@@ -33,6 +34,9 @@ public class ReciboService {
 	
 	@Autowired
 	private SolicitudCreditoMapper solicitudMapper;
+	
+	@Autowired
+	private SolicitudCreditoRepository solicitudRe;
 	
 	@Autowired
 	private ClienteProductoTelMapper clienteProductoMapper;
@@ -73,7 +77,7 @@ public class ReciboService {
 	
 	
 	public List<SolicitudCreditoDto> getListSolicitudesRecibos(long idRecibo) throws Exception{
-		List<SolicitudCredito> listSolicitudes =  this.reciboRep.GetSolicitudesRecibos(idRecibo);
+		List<SolicitudCredito> listSolicitudes =  this.solicitudRe.GetSolicitudesRecibos(idRecibo);
 		return this.solicitudMapper.entityListToDtoList(listSolicitudes);
 	}
 	

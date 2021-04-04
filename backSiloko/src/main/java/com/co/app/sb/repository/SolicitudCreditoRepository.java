@@ -48,4 +48,10 @@ public interface SolicitudCreditoRepository extends JpaRepository<SolicitudCredi
 	long countBycliente_idCliente(long idCliente);
 	
 	
+	
+	@Query(value = "SELECT *"
+			  + " FROM (select id_solicitud_credito as id_sol, id_recibo from credito_recibo) cr inner join solicitud_credito sc on cr.id_sol = sc.id_solicitud_credito where id_recibo= :id",nativeQuery = true)
+	List<SolicitudCredito> GetSolicitudesRecibos(@Param("id") long idRecibo);
+	
+	
 }

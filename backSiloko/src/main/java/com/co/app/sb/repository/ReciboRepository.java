@@ -19,9 +19,7 @@ public interface ReciboRepository extends JpaRepository<Recibo, Long>, PagingAnd
 	long countBycliente_idCliente(long idCliente);
 	
 	
-	@Query(value = "SELECT *"
-  + " FROM (select id_solicitud_credito as id_sol, id_recibo from credito_recibo) cr inner join solicitud_credito sc on cr.id_sol = sc.id_solicitud_credito where id_recibo= ?",nativeQuery = true)
-	List<SolicitudCredito> GetSolicitudesRecibos(long idRecibo);
+	
 	
 	
 	@Query(value = "select * from cliente_producto_tel where id_cliente = :id", nativeQuery = true)

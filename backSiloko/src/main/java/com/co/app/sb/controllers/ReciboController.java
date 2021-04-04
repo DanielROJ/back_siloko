@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.co.app.sb.DTOs.ClienteProductoTelDto;
 import com.co.app.sb.DTOs.ReciboDto;
 import com.co.app.sb.DTOs.SolicitudCreditoDto;
-import com.co.app.sb.model.ClienteProductoTel;
 import com.co.app.sb.services.ReciboService;
 
 @RestController()
