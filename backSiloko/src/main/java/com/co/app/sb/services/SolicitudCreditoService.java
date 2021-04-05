@@ -132,7 +132,7 @@ public class SolicitudCreditoService {
 			
 			BigDecimal cupoDisponible = cupoTotal.subtract(cupoUso);
 			
-		    if(precioProducto.doubleValue()< cupoDisponible.doubleValue()) {
+		    if(precioProducto.doubleValue()<= cupoDisponible.doubleValue()) {
 		    	cupoUso = cupoUso.add(precioProducto);
 		    	long idCupoCredito = sol.getCliente().getCupoCredito().getIdCupoCredito(); 
 		    	this.cupoCreditoService.UpdateCupoUso(idCupoCredito,cupoUso);

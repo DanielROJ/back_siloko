@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.co.app.sb.DTOs.ClienteDto;
+import com.co.app.sb.DTOs.FuncionarioAlmacenDto;
 import com.co.app.sb.DTOs.FuncionarioDto;
 import com.co.app.sb.util.LoginException;
 
@@ -31,40 +33,39 @@ public class LoginService {
 	
 
 	public FuncionarioDto authFuncionario(String correo, long codigoEmpleado) throws Exception{
-		String correoFuncionario = this.funcionarioService.getCorreoFuncionario(codigoEmpleado);
+		String correoRes = this.funcionarioService.getCorreoFuncionario(codigoEmpleado);
 		
-		if(correoFuncionario.equals(null) || !correoFuncionario.equals(correo))  {
-			correoFuncionario = null;
+		if(correoRes.equals(null) || !correoRes.equals(correo))  {
+			correoRes = null;
 			throw new LoginException();		
 		}else {
-			correoFuncionario = null;
+			correoRes = null;
 			return this.funcionarioService.getFuncionarioByCodigoEmpleado(codigoEmpleado);
 		}	
 	}
 	
 	
-	public FuncionarioDto authFuncionarioAlmacen(String correo, long codigoEmpleado) throws Exception{
-		String correoFuncionario = this.funcionarioService.getCorreoFuncionario(codigoEmpleado);
+	public FuncionarioAlmacenDto authFuncionarioAlmacen(String correo, long codigoEmpleado) throws Exception{
+		String correoRes = this.funcionarioAlmacenService.getCorreoFuncionarioAlmacen(codigoEmpleado);
 		
-		if(correoFuncionario.equals(null) || !correoFuncionario.equals(correo))  {
-			correoFuncionario = null;
+		if(correoRes.equals(null) || !correoRes.equals(correo))  {
+			correoRes = null;
 			throw new LoginException();		
 		}else {
-			correoFuncionario = null;
-			return this.funcionarioService.getFuncionarioByCodigoEmpleado(codigoEmpleado);
+			correoRes = null;
+			return this.funcionarioAlmacenService.getFuncionarioByCodigo(codigoEmpleado);
 		}	
 	}
 	
 	
-	public FuncionarioDto authCliente(String correo, long codigoEmpleado) throws Exception{
-		String correoFuncionario = this.funcionarioService.getCorreoFuncionario(codigoEmpleado);
-		
-		if(correoFuncionario.equals(null) || !correoFuncionario.equals(correo))  {
-			correoFuncionario = null;
+	public ClienteDto authCliente(String correo, long documento) throws Exception{
+		String correoRes = this.clienteService.getCorreoCliente(documento);	
+		if(correoRes.equals(null) || !correoRes.equals(correo))  {
+			correoRes = null;
 			throw new LoginException();		
 		}else {
-			correoFuncionario = null;
-			return this.funcionarioService.getFuncionarioByCodigoEmpleado(codigoEmpleado);
+			correoRes = null;
+			return this.clienteService.getClienteByDocumento(documento);
 		}	
 	}
 	

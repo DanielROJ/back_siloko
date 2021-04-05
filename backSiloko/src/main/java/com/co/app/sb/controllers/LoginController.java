@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.co.app.sb.DTOs.ClienteDto;
+import com.co.app.sb.DTOs.FuncionarioAlmacenDto;
 import com.co.app.sb.DTOs.FuncionarioDto;
 import com.co.app.sb.services.LoginService;
 
-
 /**
- * Clase que permite el control de peticiones HTTP de entrada y salida del loogin siloko 
- * @author German Daniel Rojas 
+ * Clase que permite el control de peticiones HTTP de entrada y salida del
+ * loogin siloko
+ * 
+ * @author German Daniel Rojas
  *
  */
 
@@ -28,49 +31,47 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	
 	private Logger log = Logger.getLogger(LoginController.class.getName());
-	
+
 	/**
 	 * Metodo que recibe los datos de autenticacion del login Siloko
+	 * 
 	 * @param body JSON // code : codigo_empleado , email: correo empleado
 	 * @return JSON
 	 * @throws Exception LoginException()
 	 */
 	@PostMapping("/funcionario")
-	public ResponseEntity<FuncionarioDto> authFuncionario(@RequestBody Map<String, Object> body) throws Exception{
-	
-			String correoFuncionario = (String) body.get("email");
-			long codigoFuncionario = Long.valueOf((Integer)body.get("code"));
-			
-			FuncionarioDto res = this.loginService.authFuncionario(correoFuncionario, codigoFuncionario);
-			return ResponseEntity.ok(res);
-		
+	public ResponseEntity<FuncionarioDto> authFuncionario(@RequestBody Map<String, Object> body) throws Exception {
+
+		String correoFuncionario = (String) body.get("email");
+		long codigoFuncionario = Long.valueOf((Integer) body.get("code"));
+
+		FuncionarioDto res = this.loginService.authFuncionario(correoFuncionario, codigoFuncionario);
+		return ResponseEntity.ok(res);
+
 	}
-	
-	
+
 	@PostMapping("/funcionarioAlmacen")
-	public ResponseEntity<FuncionarioDto> authFuncionarioAlm(@RequestBody Map<String, Object> body) throws Exception{
-	
-			String correoFuncionario = (String) body.get("email");
-			long codigoFuncionario = Long.valueOf((Integer)body.get("code"));
-			
-			FuncionarioDto res = this.loginService.authFuncionario(correoFuncionario, codigoFuncionario);
-			return ResponseEntity.ok(res);
-		
+	public ResponseEntity<FuncionarioAlmacenDto> authFuncionarioAlm(@RequestBody Map<String, Object> body)
+			throws Exception {
+
+		String correoFuncionario = (String) body.get("email");
+		long codigoFuncionario = Long.valueOf((Integer) body.get("code"));
+
+		FuncionarioAlmacenDto res = this.loginService.authFuncionarioAlmacen(correoFuncionario, codigoFuncionario);
+		return ResponseEntity.ok(res);
+
 	}
-	
+
 	@PostMapping("/cliente")
-	public ResponseEntity<FuncionarioDto> authCliente(@RequestBody Map<String, Object> body) throws Exception{
-	
-			String correoFuncionario = (String) body.get("email");
-			long codigoFuncionario = Long.valueOf((Integer)body.get("code"));
-			
-			FuncionarioDto res = this.loginService.authFuncionario(correoFuncionario, codigoFuncionario);
-			return ResponseEntity.ok(res);
-		
+	public ResponseEntity<ClienteDto> authCliente(@RequestBody Map<String, Object> body) throws Exception {
+
+		String correo = (String) body.get("email");
+		long clienteDocumento = Long.valueOf((Integer) body.get("code"));
+
+		ClienteDto res = this.loginService.authCliente(correo, clienteDocumento);
+		return ResponseEntity.ok(res);
+
 	}
-	
-	
+
 }
-  

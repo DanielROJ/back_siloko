@@ -13,4 +13,6 @@ public interface FuncionarioAlmacenRepository extends JpaRepository<FuncionarioA
 	@Query(value = "SELECT f.correo FROM FuncionarioAlmacen f WHERE f.codigoEmpleado = :codigo")
 	Optional<String> findEmail(@Param("codigo") long codigoEmpleado);
 	
+	Optional<FuncionarioAlmacen> findBycodigoEmpleado(long codigo);
+	
 }

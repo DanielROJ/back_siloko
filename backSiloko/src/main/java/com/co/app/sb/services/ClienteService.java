@@ -85,6 +85,17 @@ public class ClienteService {
 	}
 	
 	
+	/**
+	 * Metodo encargado de retorna el correo electronico basado en el documento de identificacion
+	 * @param documentoId
+	 * @return
+	 * @throws Exception
+	 */
+	public String getCorreoCliente(long documentoId) throws Exception{
+		return this.clienteRep.getCorreoByDocumento(documentoId);
+	}
+	
+	
 	
 	
 }
