@@ -52,8 +52,9 @@ test {
 	useJUnitPlatform()
 }
 
-task wrapper(type: Wrapper) {
+wrapper {
     gradleVersion = '6.8'
+    distributionUrl = distributionUrl.replace("bin", "all")
 }
 
 //For execute project in mode dev
