@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * German Daniel Rojas
- * @author 1018505981
+ * @author 
  * 
  * german.rojas@segurosbolivar.com
  *

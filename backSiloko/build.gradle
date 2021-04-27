@@ -47,8 +47,13 @@ bootRun {
     classpath = sourceSets.main.runtimeClasspath + configurations.dev
 }
 
+
 test {
 	useJUnitPlatform()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '6.8'
 }
 
 //For execute project in mode dev
